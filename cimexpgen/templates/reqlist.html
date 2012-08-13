@@ -1,0 +1,46 @@
+{% extends "home.html" %}
+
+{% block pagecontent %}
+
+<section id="tables">
+  <div class="page-header">
+    <h1>Requirements <small>Table of current numerical requirements</small></h1>
+  </div>
+              
+  <div class="row">
+    <div class="span12">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Doc ID</th>
+            <th>Type</th>
+            <th>Created</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>              
+        <tbody>
+          {% for req in allreqs %}
+            <tr>
+              <td>{{ req.name }}</td>
+              <td>{{ req.docid }}</td>
+              <td>{{ req.reqtype }}</td>
+              <td>{{ req.created }}</td>
+              <td>{{ exp.updated }}</td>
+              <td><a href="{{ req.url }}"><img src="{{ STATIC_URL }}images/user_view.png" title="View" /></a></td>
+              <td><a href="{{ req.delurl }}""><img src="{{ STATIC_URL }}images/trash.png" title="Delete" /></a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">  
+    <div class="span2 offset11">
+      <a class="btn btn-primary" href="{{ urls.reqadd }}">Add New</a>
+    </div>
+  </div>
+</section>
+    
+{% endblock %}   

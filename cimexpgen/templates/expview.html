@@ -1,0 +1,109 @@
+{% extends "home.html" %}
+
+{% block pagecontent %}
+           
+<section id="views">
+  <div class="row">
+    <div class="span12">   
+       <legend>Experiment {{exp.abbrev}}</legend>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="span2 offset2">
+      <strong>Abbreviation</strong>
+    </div>
+    <div class="span2">
+      {{ exp.abbrev }}
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="span2 offset2">
+      <strong>Title</strong>
+    </div>
+    <div class="span2">
+      {{ exp.title }}
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="span2 offset2">
+      <strong>Author</strong>
+    </div>
+    <div class="span2">
+      {{ exp.author }}
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="span2 offset2">
+      <strong>Project</strong>
+    </div>
+    <div class="span2">
+      {{ exp.project }}
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="span2 offset2">
+      <strong>Description</strong>
+    </div>
+    <div class="span2">
+      {{ exp.description }}
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="span2 offset2">
+      <strong>Rationale</strong>
+    </div>
+    <div class="span2">
+      {{ exp.rationale }}
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="span2 offset2">
+      <strong>Control</strong>
+    </div>
+    <div class="span2">
+      {{ exp.control }}
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="span2 offset2">
+      <strong>Associated Requirements</strong>
+    </div>
+    <div class="span2">
+      <table>
+        <tbody>
+          {% for req in reqs %}
+            <tr>
+              <td>
+                <a href="#" class="icon-info-sign" title='Description' rel="popover" data-content="{{ req.description }}"></a>
+                {{ req.name }} 
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="span5 offset7">
+      <a href="{{ urls.expedit }}" class="btn btn-primary"><span class="bt_green_lft"></span><strong>Edit this Experiment</strong><span class="bt_green_r"></span></a>
+      <a href="{{ urls.exppub }}" class="btn btn-success" target="_blank"><span class="bt_red_lft"></span><strong>Create CIM Document</strong><span class="bt_red_r"></span></a>           
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="span5 offset7">
+      <a href="{{ urls.explist }}">..or return to experiment list</a>                             
+    </div>
+  </div>
+</section>
+
+{% endblock %} 

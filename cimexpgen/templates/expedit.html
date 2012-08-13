@@ -1,0 +1,125 @@
+{% extends "home.html" %}
+
+{% block pagecontent %}
+
+<section id="forms">
+  <div class="row">
+    <div class="span12">   
+      {% if expform.instance.abbrev %}
+        <legend>Edit Experiment {{expform.instance.abbrev}}</legend>
+      {% else %}
+        <legend>Edit New Experiment</legend>
+      {% endif %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="span6 offset2">
+      <form action="{{ urls.expedit }}" method="POST" class="form-horizontal">
+        <fieldset>
+          <div class="control-group">
+            <label class="control-label" for="abbrev">Abbreviation</label>
+            <div class="controls">
+              {{ expform.abbrev }}
+              <p class="help-block">Some explanatory text</p>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="title">Title</label>
+            <div class="controls">
+              {{ expform.title }}
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="author">Author</label>
+            <div class="controls">
+              {{ expform.author }}
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="project">Project</label>
+            <div class="controls">
+              {{ expform.project }}
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="description">Description</label>
+            <div class="controls">
+              {{ expform.description }}
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="rationale">Rationale</label>
+            <div class="controls">
+              {{ expform.rationale }}
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="control">Control?</label>
+            <div class="controls">
+              <label class="checkbox">
+                {{ expform.control }}
+                <p class="help-block">Is this a control experiment?</p>
+              </label>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="reqs">Associated requirements</label>
+            <div class="controls">
+              {{ expform.requirements }}
+              <a class="btn" data-toggle="modal" href="#myModal" >Add new requirement</a>
+            </div>
+          </div>
+          
+          <div class="form-actions">
+            <button name="cancel" type="submit" value="Cancel" class="btn">Cancel</button>
+            <button type="submit" name="expform" class="btn btn-primary">Save changes</button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</section>
+
+<div class="modal hide" id="myModal">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">×</a>
+    <h3>Add new requirement</h3>
+  </div>
+  <div class="modal-body">
+    <form class="ajax" method="POST" action="{{ urls.reqedit }}">
+        <fieldset>
+            <div class="control-group">
+                <label class="control-label" for="name">Name</label>
+                <div class="controls">
+                    {{ reqform.name }}
+                </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="docid">Doc ID</label>
+                <div class="controls">
+                  {{ reqform.docid }}
+                </div>
+            </div> 
+            <div class="control-group">
+                <label class="control-label" for="reqtype">Requirement Type</label>
+                <div class="controls">
+                    {{ reqform.reqtype }}
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="description">Description</label>
+                <div class="controls">
+                    {{ reqform.description }}
+                </div>
+            </div>
+	        <div class="actions">
+	            <input class="btn btn-primary" name="reqform" type="submit" value="Submit" />
+	            <a class="btn close-dialog" href="#">Cancel</a>
+	        </div>
+        </fieldset>
+    </form>
+  </div>
+</div>
+  
+ 
+{% endblock %}

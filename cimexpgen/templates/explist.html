@@ -1,0 +1,74 @@
+{% extends "home.html" %}
+
+<script>
+    $('#myModal').modal(options)
+</script
+
+<script type="text/javascript">
+    $(function() {
+      $(".ask").jConfirmAction();
+    });
+</script>
+
+{% block pagecontent %}
+
+<section id="tables">
+  <div class="page-header">
+    <h1>Experiments <small>Table of current top level experiments</small></h1>
+  </div>
+  
+  <div class="row">
+    <div class="span12">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Abbreviation</th>
+            <th>Author</th>
+            <th>Project</th>
+            <th>Created</th>
+            <th>Updated</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for exp in allexps %}
+            <tr>
+              <td>{{ exp.abbrev }}</td>
+              <td>{{ exp.author }}</td>
+              <td>{{ exp.project }}</td>
+              <td>{{ exp.created }}</td>
+              <td>{{ exp.updated }}</td>
+              <td><a href="{{exp.url}}"><img src="{{ STATIC_URL }}images/user_view.png" title="View" /></a></td>
+              <td><a href="{{exp.cpurl}}"><img src="{{ STATIC_URL }}images/user_copy.png" title="Copy" /></a></td>
+              <td><a href="{{exp.delurl}}"><img src="{{ STATIC_URL }}images/trash.png" title="Delete" /></a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">  
+    <div class="span2 offset11">
+      <a class="btn btn-primary" href="{{ urls.expadd }}">Add New</a>
+    </div>
+  </div>
+  
+  <div class="modal hide" id="myModal">
+    <div class="modal-header">
+    <a class="close" data-dismiss="modal">×</a>
+    <h3>Modal header</h3>
+    </div>
+    <div class="modal-body">
+    <p>One fine body…</p>
+    </div>
+    <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">Close</a>
+    <a href="#" class="btn btn-primary">Save changes</a>
+    </div>
+  </div>
+  
+</section>
+    
+{% endblock %}

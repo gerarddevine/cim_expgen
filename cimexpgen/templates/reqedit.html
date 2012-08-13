@@ -1,0 +1,55 @@
+{% extends "home.html" %}
+
+{% block pagecontent %}
+
+<section id="forms">
+  <div class="row">
+    <div class="span12">   
+      {% if form.instance.abbrev %}
+        <legend>Edit Requirement {{form.instance.abbrev}}</legend>
+      {% else %}
+        <legend>Edit New Requirement</legend>
+      {% endif %}
+    </div>
+  </div>
+     
+  <div class="row">
+    <div class="span6 offset2">
+      <form action="{{ urls.reqedit }}" method="POST" class="form-horizontal">
+        <fieldset>
+          <div class="control-group">
+            <label class="control-label" for="name">Name</label>
+            <div class="controls">
+              {{ form.name }}
+              <p class="help-block">Some explanatory text</p>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="docid">Doc ID</label>
+            <div class="controls">
+              {{ form.docid }}
+            </div>
+          </div>      
+          <div class="control-group">
+            <label class="control-label" for="reqtype">Requirement Type</label>
+            <div class="controls">
+              {{ form.reqtype }}
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="description">Description</label>
+            <div class="controls">
+              {{ form.description }}
+            </div>
+          </div>
+          <div class="form-actions">
+            <button name="cancel" type="submit" value="Cancel" class="btn">Cancel</button>
+            <button type="submit" name="reqform" class="btn btn-primary">Save changes</button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</section>
+    
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "home.html" %}
+
+{% block pagecontent %}
+
+<section id="views">
+  <div class="row">
+    <div class="span12">   
+       <legend>Requirement {{req.name}}</legend>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="span2 offset2">
+      <strong>Name</strong>
+    </div>
+    <div class="span2">
+      {{ req.name }}
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="span2 offset2">
+      <strong>Doc ID</strong>
+    </div>
+    <div class="span2">
+      {{ req.docid }}
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="span2 offset2">
+      <strong>Description</strong>
+    </div>
+    <div class="span2">
+      {{ req.description }}
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="span2 offset2">
+      <strong>Requirement Type</strong>
+    </div>
+    <div class="span2">
+      {{ req.reqtype }}
+    </div>
+  </div>   
+  <br/>
+  <div class="row">
+    <div class="span2 offset10">
+      <a href="{{ urls.reqedit }}" class="btn btn-primary"><span class="bt_green_lft"></span><strong>Edit this Requirement</strong><span class="bt_green_r"></span></a>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="span2 offset10">
+      <a href="{{ urls.reqlist }}">..or return to requirement list</a>                             
+    </div>
+  </div>
+</section>
+
+{% endblock %}      
