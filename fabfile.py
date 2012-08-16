@@ -40,5 +40,5 @@ def prepare_deployment():
     local('git status')
     local('git add .')
     local('git commit') 
-    local('git push master origin')  # Push master to github repository
+    local('git push origin master')  # Push master to github repository
     local('echo "Deployment success')
