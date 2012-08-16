@@ -36,9 +36,7 @@ def deploy():
 def prepare_deployment():
     #local('python manage.py test myapp')
     local('echo "Preparing deployment......."')
-    local('echo "Current git status:"')
     local('git status')
     local('git add .')
     local('git commit') 
     local('git push origin master')  # Push master to github repository
-    local('echo "Deployment success"')
