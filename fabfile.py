@@ -10,10 +10,10 @@ env.password = "" # at lease for me it's easier to keep my password in the fabfi
 
 ### Local tasks
 def commit(message):
-local('git add .') 
-_commit = "git commit -a -m '{0}'".format(message)
-local(_commit)
-local('git push origin master')
+    local('git add .') 
+    _commit = "git commit -a -m '{0}'".format(message)
+    local(_commit)
+    local('git push origin master')
 
 
 ### Server tasks
@@ -26,3 +26,19 @@ def deploy():
         sudo('git pull')
     
     reload_server
+
+
+#-------------------------------------------------------------
+# New code
+#
+#-------------------------------------------------------------
+
+def prepare_deployment():
+    #local('python manage.py test myapp')
+    local('echo "Preparing deployment......."')
+    local('echo "Current git status:"')
+    local('git status')
+    local('git add .')
+    local('git commit') 
+    local('git push master origin')  # Push master to github repository
+    local('echo "Deployment success')
