@@ -6,8 +6,8 @@ from django.db import models
 
   
 class Experiment(models.Model):
-    ''' 
-    Class to represent numericalExperiment 
+    '''Class to represent numericalExperiment 
+
     '''
     
     abbrev = models.CharField(max_length=40)
@@ -41,8 +41,8 @@ class Experiment(models.Model):
         
 
 class NumericalRequirement(models.Model):
-    ''' 
-    Class to represent a numerical requirement
+    '''Class to represent a numerical requirement
+
     '''
     
     docid = models.CharField(max_length=64)
@@ -55,9 +55,10 @@ class NumericalRequirement(models.Model):
     def __unicode__(self):
         return self.name
     
+
 class RequirementOption(models.Model):
-    ''' 
-    Class to represent a numerical requirement option
+    ''' Class to represent a numerical requirement option
+
     '''
     
     docid = models.CharField(max_length=64)
