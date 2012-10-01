@@ -5,16 +5,25 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-
-    # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
-    # to INSTALLED_APPS to enable admin documentation:
-    # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
+                           
+    # admin:
     url(r'^admin/', include(admin.site.urls)),
     
-    (r'', include('cimexpgen.expgenapp.urls')),
+    # home and about pages
+    (r'^$','cimexpgen.apps.expgenapp.views.home', {}, 'home'),
+    (r'^home/$','cimexpgen.apps.expgenapp.views.home', {}, 'home'),
+    (r'^about/$','cimexpgen.apps.expgenapp.views.about', {}, 'about'),
+        
+    #url for user registration/login/logour
+    (r'^register/$', 'cimexpgen.apps.person.views.UserRegistration'),
+    (r'^login/$', 'cimexpgen.apps.person.views.LoginRequest', {}, 'login'),
+    (r'^logout/$', 'cimexpgen.apps.person.views.LogoutRequest', {}, 'logout'),
+    
+    # including app level urls.py's
+    (r'', include('cimexpgen.apps.expgenapp.urls')),
+    (r'', include('cimexpgen.apps.person.urls')),
 )
+
 
 if settings.DEBUG:
     urlpatterns += patterns('django.views.static',

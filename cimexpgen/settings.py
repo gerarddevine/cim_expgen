@@ -94,15 +94,16 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
 )
 
-
+# provide our get_profile()
+AUTH_PROFILE_MODULE = 'person.Person'
 
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
-    # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     'south',
-    'expgenapp',
+    'apps.expgenapp',
+    'apps.person'
 )

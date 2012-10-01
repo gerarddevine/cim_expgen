@@ -1,20 +1,6 @@
-{% extends "base.html" %}
-
-{% block content %}
-
-  <div class="container">
-  
-    {% include "sitemenu.html" %}
-    {% include "sitemasthead.html" %}
+{% extends "page_without_submenu.html" %}
     
     {% block pagecontent %}
       {{ message }}
     {% endblock %}
-    
-    {% include "sitefooter.html" %}
-    
-  </div>
-
-{% endblock %}   
-
 

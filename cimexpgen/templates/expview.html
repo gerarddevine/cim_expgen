@@ -1,8 +1,7 @@
-{% extends "home.html" %}
+{% extends "page_with_submenu.html" %}
 
 {% block pagecontent %}
            
-<section id="views">
   <div class="row">
     <div class="span12">   
        <legend>Experiment {{exp.abbrev}}</legend>
@@ -10,7 +9,7 @@
   </div>
   <br/>
   <div class="row">
-    <div class="span2 offset2">
+    <div class="span3 offset3">
       <strong>Abbreviation</strong>
     </div>
     <div class="span2">
@@ -19,7 +18,7 @@
   </div>
   <br/>
   <div class="row">
-    <div class="span2 offset2">
+    <div class="span3 offset3">
       <strong>Title</strong>
     </div>
     <div class="span2">
@@ -28,7 +27,7 @@
   </div>
   <br/>
   <div class="row">
-    <div class="span2 offset2">
+    <div class="span3 offset3">
       <strong>Author</strong>
     </div>
     <div class="span2">
@@ -37,7 +36,7 @@
   </div>
   <br/>
   <div class="row">
-    <div class="span2 offset2">
+    <div class="span3 offset3">
       <strong>Project</strong>
     </div>
     <div class="span2">
@@ -46,7 +45,7 @@
   </div>
   <br/>
   <div class="row">
-    <div class="span2 offset2">
+    <div class="span3 offset3">
       <strong>Description</strong>
     </div>
     <div class="span2">
@@ -55,7 +54,7 @@
   </div>
   <br/>
   <div class="row">
-    <div class="span2 offset2">
+    <div class="span3 offset3">
       <strong>Rationale</strong>
     </div>
     <div class="span2">
@@ -64,7 +63,7 @@
   </div>
   <br/>
   <div class="row">
-    <div class="span2 offset2">
+    <div class="span3 offset3">
       <strong>Control</strong>
     </div>
     <div class="span2">
@@ -73,7 +72,7 @@
   </div>
   <br/>
   <div class="row">
-    <div class="span2 offset2">
+    <div class="span3 offset3">
       <strong>Associated Requirements</strong>
     </div>
     <div class="span2">
@@ -93,17 +92,16 @@
   </div>
   <br/>
   <div class="row">
-    <div class="span5 offset7">
-      <a href="{{ urls.expedit }}" class="btn btn-primary"><span class="bt_green_lft"></span><strong>Edit this Experiment</strong><span class="bt_green_r"></span></a>
-      <a href="{{ urls.exppub }}" class="btn btn-success" target="_blank"><span class="bt_red_lft"></span><strong>Create CIM Document</strong><span class="bt_red_r"></span></a>           
+    <div class="span3 offset9">
+      <a href="{{ urls.expedit }}" class="btn btn-primary btn-block"><span class="bt_green_lft"></span><strong>Edit this Experiment</strong><span class="bt_green_r"></span></a>
+      <a href="{{ urls.exppub }}" class="btn btn-success btn-block" target="_blank"><span class="bt_red_lft"></span><strong>Create CIM Document</strong><span class="bt_red_r"></span></a>           
     </div>
   </div>
   <br/>
   <div class="row">
-    <div class="span5 offset7">
+    <div class="span3 offset9">
       <a href="{{ urls.explist }}">..or return to experiment list</a>                             
     </div>
   </div>
-</section>
 
 {% endblock %} 

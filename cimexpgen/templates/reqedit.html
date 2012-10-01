@@ -1,55 +1,104 @@
-{% extends "home.html" %}
+{% extends "page_with_submenu.html" %}
 
 {% block pagecontent %}
 
-<section id="forms">
-  <div class="row">
-    <div class="span12">   
-      {% if form.instance.abbrev %}
-        <legend>Edit Requirement {{form.instance.abbrev}}</legend>
-      {% else %}
-        <legend>Edit New Requirement</legend>
-      {% endif %}
-    </div>
+<br/>
+
+<div class="row">
+  <div class="span12">   
+    {% if reqform.instance.abbrev %}
+      <legend>Edit Requirement {{reqform.instance.abbrev}}</legend>
+    {% else %}
+      <legend>Edit New Requirement</legend>
+    {% endif %}
   </div>
+</div>
+
+{% if reqform.errors%} 
+    <div class="row">
+        <div class="offset2 span8">
+            <div class="alert alert-error ">
+              {% if reqform.non_field_errors %}
+                <p>{{ reqform.non_field_errors }}</p>
+              {% else %}
+                <p> Please correct the marked fields</p>
+              {% endif %}
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+<br/>
      
   <div class="row">
-    <div class="span6 offset2">
-      <form action="{{ urls.reqedit }}" method="POST" class="form-horizontal">
-        <fieldset>
-          <div class="control-group">
-            <label class="control-label" for="name">Name</label>
-            <div class="controls">
-              {{ form.name }}
-              <p class="help-block">Some explanatory text</p>
+    <div class="offset4 span4">
+      <form action="{{ urls.reqedit }}" method="POST" class="form-horizontal well">
+        {% csrf_token %}
+           
+            <div>
+              {% if reqform.name.errors %}
+                {% for error in reqform.name.errors %} 
+                    <p class="error"> 
+                        {{ error }}
+                    </p>
+                {% endfor %} 
+              {% endif %}
+              <p>
+                <label for="name"{% if reqform.name.errors %} class="error" {% endif %}>Name</label>
+              </p>
+              <p>{{ reqform.name }}</p>
             </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label" for="docid">Doc ID</label>
-            <div class="controls">
-              {{ form.docid }}
+            
+            <div>
+              {% if reqform.docid.errors %}
+                {% for error in reqform.docid.errors %} 
+                    <p class="error"> 
+                        {{ error }}
+                    </p>
+                {% endfor %} 
+              {% endif %}
+              <p>
+                <label for="docid"{% if reqform.docid.errors %} class="error" {% endif %}>Doc ID</label>
+              </p>
+              <p>{{ reqform.docid }}</p>
+            </div> 
+            
+            <div>
+              {% if reqform.reqtype.errors %}
+                {% for error in reqform.reqtype.errors %} 
+                    <p class="error"> 
+                        {{ error }}
+                    </p>
+                {% endfor %} 
+              {% endif %}
+              <p>
+                <label for="reqtype"{% if reqform.rectype.errors %} class="error" {% endif %}>Requirement Type</label>
+              </p>
+              <p>{{ reqform.reqtype }}</p>
+            </div>          
+            
+            <div>
+              {% if reqform.description.errors %}
+                {% for error in reqform.description.errors %} 
+                    <p class="error"> 
+                        {{ error }}
+                    </p>
+                {% endfor %} 
+              {% endif %}
+              <p>
+                <label for="description"{% if reqform.description.errors %} class="error" {% endif %}>Description</label>
+              </p>
+              <p>{{ reqform.description }}</p>
             </div>
-          </div>      
-          <div class="control-group">
-            <label class="control-label" for="reqtype">Requirement Type</label>
-            <div class="controls">
-              {{ form.reqtype }}
-            </div>
+          
+          <br/>      
+          <div class="actions">
+            <button name="cancel" type="submit" value="Cancel" class="btn btn-block">Cancel</button>
+            <button type="submit" name="reqform" class="btn btn-primary btn-block">Save changes</button>
           </div>
-          <div class="control-group">
-            <label class="control-label" for="description">Description</label>
-            <div class="controls">
-              {{ form.description }}
-            </div>
-          </div>
-          <div class="form-actions">
-            <button name="cancel" type="submit" value="Cancel" class="btn">Cancel</button>
-            <button type="submit" name="reqform" class="btn btn-primary">Save changes</button>
-          </div>
-        </fieldset>
+          
       </form>
     </div>
   </div>
-</section>
     
 {% endblock %}
