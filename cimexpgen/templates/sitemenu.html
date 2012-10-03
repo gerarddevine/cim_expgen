@@ -12,14 +12,14 @@
       </a>
       <div class="nav-collapse">
         <ul class="nav">
-          <li class="">
+          <li>
             <a href={{ urls.home }}>Home</a>
           </li>
-          <li class="">
+          <li>
             <a href={{ urls.about }}>About</a>
           </li>
           <li class="divider-vertical"></li>
-          <li class="">
+          <li>
             {% if user.is_authenticated %}
               <a href={{ urls.logout }}>Log out {{ user.username }}</a>
             {% else %}

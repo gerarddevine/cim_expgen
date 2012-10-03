@@ -1,27 +1,20 @@
-{% extends "page_without_submenu.html" %}
+{% extends "one_column_page.html" %}
 
-{% block pagecontent %}
-
-<br/>
-
-<div class="alert alert-info">
-    Log in to your account....
-</div>
+{% block page_column_one %}
 
 {% if error or form.errors%}
-    <div class="row">
-        <div class="offset2 span8">
-            <div class="alert alert-error ">
-                <!-- <p> Your username and password did not match. Please try again.</p> -->
-                {% if error %}
-                  <p>{{ error }}</p>
-                {% endif %}
-                {% if form.errors %}
-                  <p> Please correct the marked fields</p>
-                {% endif %}
-            </div>
-        </div>
-    </div>
+  <div class="alert alert-error ">
+    {% if error %}
+      <p>{{ error }}</p>
+    {% endif %}
+    {% if form.errors %}
+      <p> Please correct the marked fields</p>
+    {% endif %}
+  </div>
+{% else %}
+  <div class="alert alert-success">
+    Log in to your account....
+  </div>
 {% endif %}
 
 <br/>
@@ -46,7 +39,7 @@
 			<br/>
 			<br/>			
 			<div class="actions">
-	            <button type="submit" class="btn btn-primary btn-block">Login</button>
+	            <button type="submit" class="btn btn-inverse btn-block">Login</button>
 	            <a href="/register/" class="btn btn-block"><strong>or Register Account</strong></a>   
 	        </div>
 		</form>

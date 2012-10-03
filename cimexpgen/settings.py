@@ -97,6 +97,10 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 # provide our get_profile()
 AUTH_PROFILE_MODULE = 'person.Person'
 
+# URL for @login_required decorator to use
+LOGIN_URL = '/login' 
+
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',

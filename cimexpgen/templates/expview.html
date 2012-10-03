@@ -1,81 +1,87 @@
-{% extends "page_with_submenu.html" %}
+{% extends "two_column_page_wideleft.html" %}
 
-{% block pagecontent %}
-           
-  <div class="row">
-    <div class="span12">   
-       <legend>Experiment {{exp.abbrev}}</legend>
+
+  {% block page_top_menu %}
+    
+    {% include 'pagemenu.html' %}
+    
+    <div class="page-header">
+      <h3>Experiment <strong>{{exp.abbrev}}</strong></h3>
     </div>
-  </div>
-  <br/>
+  
+  {% endblock %}
+
+   
+  {% block page_column_one %}
+  
   <div class="row">
-    <div class="span3 offset3">
+    <div class="span2">
       <strong>Abbreviation</strong>
     </div>
-    <div class="span2">
+    <div class="span4">
       {{ exp.abbrev }}
     </div>
   </div>
   <br/>
   <div class="row">
-    <div class="span3 offset3">
+    <div class="span2">
       <strong>Title</strong>
     </div>
-    <div class="span2">
+    <div class="span4">
       {{ exp.title }}
     </div>
   </div>
   <br/>
   <div class="row">
-    <div class="span3 offset3">
+    <div class="span2">
       <strong>Author</strong>
     </div>
-    <div class="span2">
+    <div class="span4">
       {{ exp.author }}
     </div>
   </div>
   <br/>
   <div class="row">
-    <div class="span3 offset3">
+    <div class="span2">
       <strong>Project</strong>
     </div>
-    <div class="span2">
+    <div class="span4">
       {{ exp.project }}
     </div>
   </div>
   <br/>
   <div class="row">
-    <div class="span3 offset3">
+    <div class="span2">
       <strong>Description</strong>
     </div>
-    <div class="span2">
+    <div class="span4">
       {{ exp.description }}
     </div>
   </div>
   <br/>
   <div class="row">
-    <div class="span3 offset3">
+    <div class="span2">
       <strong>Rationale</strong>
     </div>
-    <div class="span2">
+    <div class="span4">
       {{ exp.rationale }}
     </div>
   </div>
   <br/>
   <div class="row">
-    <div class="span3 offset3">
+    <div class="span2">
       <strong>Control</strong>
     </div>
-    <div class="span2">
+    <div class="span4">
       {{ exp.control }}
     </div>
   </div>
   <br/>
   <div class="row">
-    <div class="span3 offset3">
+    <div class="span2">
       <strong>Associated Requirements</strong>
     </div>
-    <div class="span2">
+    <div class="span4">
       <table>
         <tbody>
           {% for req in reqs %}
@@ -90,18 +96,23 @@
       </table>
     </div>
   </div>
-  <br/>
+
+{% endblock %} 
+
+
+{% block page_column_two %}
+
   <div class="row">
-    <div class="span3 offset9">
-      <a href="{{ urls.expedit }}" class="btn btn-primary btn-block"><span class="bt_green_lft"></span><strong>Edit this Experiment</strong><span class="bt_green_r"></span></a>
-      <a href="{{ urls.exppub }}" class="btn btn-success btn-block" target="_blank"><span class="bt_red_lft"></span><strong>Create CIM Document</strong><span class="bt_red_r"></span></a>           
+    <div>
+      <a href="{{ urls.expedit }}" class="btn btn-inverse btn-block"><strong>Edit this Experiment</strong></a>
+      <a href="{{ urls.exppub }}" class="btn btn-success btn-block" target="_blank"><strong>Create CIM Document</strong></a>           
     </div>
   </div>
   <br/>
   <div class="row">
-    <div class="span3 offset9">
+    <div class="center">
       <a href="{{ urls.explist }}">..or return to experiment list</a>                             
     </div>
   </div>
-
+  
 {% endblock %} 

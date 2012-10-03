@@ -1,21 +1,20 @@
-{% extends "page_with_submenu.html" %}
+{% extends "two_column_page_wideleft.html" %}
 
-{% block pagecontent %}
 
-<br/>
-
-<div class="row">
-  <div class="span12">   
-    {% if expform.instance.abbrev %}
-      <legend>Edit Experiment {{expform.instance.abbrev}}</legend>
-    {% else %}
-      <legend>Edit New Experiment</legend>
-    {% endif %}
-  </div>
-</div>
-
-{% if expform.errors%} 
-    <div class="row">
+  {% block page_top_menu %}
+    
+    {% include 'pagemenu.html' %}
+    
+    <div class="page-header">   
+      {% if expform.instance.abbrev %}
+        <h3>Edit Experiment <strong>{{expform.instance.abbrev}}</strong></h3>
+      {% else %}
+        <h3>Edit New Experiment</h3>
+      {% endif %}
+    </div>
+    
+    {% if expform.errors%} 
+      <div class="row">
         <div class="offset2 span8">
             <div class="alert alert-error ">
               {% if expform.non_field_errors %}
@@ -25,17 +24,19 @@
               {% endif %}
             </div>
         </div>
-    </div>
-{% endif %}
-
-<br/>
+      </div>
+    {% endif %}
   
-<div class="row">
-  <div class="span4 offset4">
-    <form action="{{ urls.expedit }}" method="POST" class="form-horizontal well">
-    {% csrf_token %}
-            
-            <div>
+  {% endblock %}
+
+
+  {% block page_column_one %}
+
+    <div class="row">
+      <form action="{{ urls.expedit }}" method="POST" class="form-horizontal">
+        {% csrf_token %}
+        
+            <div class="span2">
               {% if expform.abbrev.errors %}
                 {% for error in expform.abbrev.errors %} 
                     <p class="error"> 
@@ -46,10 +47,12 @@
               <p>
                 <label for="abbrev"{% if expform.name.errors %} class="error" {% endif %}>Abbreviation</label>
               </p>
+            </div>
+            <div class="span4">
               <p>{{ expform.abbrev }}</p>
             </div>
             
-            <div>
+            <div class="span2">
               {% if expform.title.errors %}
                 {% for error in expform.title.errors %} 
                     <p class="error"> 
@@ -60,10 +63,12 @@
               <p>
                 <label for="title"{% if expform.title.errors %} class="error" {% endif %}>Title</label>
               </p>
+            </div>
+            <div class="span4">
               <p>{{ expform.title }}</p>
             </div>
             
-            <div>
+            <div class="span2">
               {% if expform.author.errors %}
                 {% for error in expform.author.errors %} 
                     <p class="error"> 
@@ -74,10 +79,12 @@
               <p>
                 <label for="author"{% if expform.author.errors %} class="error" {% endif %}>Author</label>
               </p>
+            </div>
+            <div class="span4">
               <p>{{ expform.author }}</p>
             </div>
             
-            <div>
+            <div class="span2">
               {% if expform.project.errors %}
                 {% for error in expform.project.errors %} 
                     <p class="error"> 
@@ -88,10 +95,12 @@
               <p>
                 <label for="project"{% if expform.project.errors %} class="error" {% endif %}>Project</label>
               </p>
+            </div>
+            <div class="span4">
               <p>{{ expform.project }}</p>
             </div>
             
-            <div>
+            <div class="span2">
               {% if expform.description.errors %}
                 {% for error in expform.description.errors %} 
                     <p class="error"> 
@@ -102,10 +111,12 @@
               <p>
                 <label for="description"{% if expform.description.errors %} class="error" {% endif %}>Description</label>
               </p>
+            </div>
+            <div class="span4">
               <p>{{ expform.description }}</p>
             </div>
             
-            <div>
+            <div class="span2">
               {% if expform.rationale.errors %}
                 {% for error in expform.rationale.errors %} 
                     <p class="error"> 
@@ -116,10 +127,12 @@
               <p>
                 <label for="rationale"{% if expform.rationale.errors %} class="error" {% endif %}>Rationale</label>
               </p>
+            </div>
+            <div class="span4">
               <p>{{ expform.rationale }}</p>
             </div>
             
-            <div>
+            <div class="span2">
               {% if expform.control.errors %}
                 {% for error in expform.control.errors %} 
                     <p class="error"> 
@@ -130,10 +143,12 @@
               <p>
                 <label for="control"{% if expform.control.errors %} class="error" {% endif %}>Control?</label>
               </p>
+            </div>
+            <div class="span4">
               <p>{{ expform.control }}</p>
             </div>
             
-            <div>
+            <div class="span2">
               {% if expform.requirements.errors %}
                 {% for error in expform.requirements.errors %} 
                     <p class="error"> 
@@ -144,28 +159,34 @@
               <p>
                 <label for="reqs"{% if expform.requirements.errors %} class="error" {% endif %}>Associated requirements</label>
               </p>
+            </div>
+            <div class="span4">
               <p>{{ expform.requirements }}
               <a class="btn" data-toggle="modal" href="#myModal" >Add new requirement</a>
               </>
-            </div>
-          
-          <br/>      
-          <div class="actions">
-            <button name="cancel" type="submit" value="Cancel" class="btn btn-block">Cancel</button>
-            <button type="submit" name="expform" class="btn btn-primary btn-block">Save changes</button>
-          </div>
-      </form>
-    </div>
-  </div>
+            </div> 
+            
+        </div>
+{% endblock %} 
+
+
+{% block page_column_two %}
+	   
+	  <div class="row">
+	    <button type="submit" name="expform" class="btn btn-success btn-block">Save changes</button>
+	    <button name="cancel" type="submit" value="Cancel" class="btn btn-block">Cancel</button>
+	  </div>
+  
+  </form>
   
 
-<div class="modal hide" id="myModal">
-  <div class="modal-header">
-    <a class="close" data-dismiss="modal">×</a>
-    <h3>Add new requirement</h3>
-  </div>
-  <div class="modal-body">
-    <form class="ajax" method="POST" action="{{ urls.reqedit }}">
+  <div class="modal hide" id="myModal">
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">×</a>
+      <h3>Add new requirement</h3>
+    </div>
+    <div class="modal-body">
+      <form class="ajax" method="POST" action="{{ urls.reqedit }}">
         <fieldset>
             <div class="control-group">
                 <label class="control-label" for="name">Name</label>
@@ -192,12 +213,12 @@
                 </div>
             </div>
 	        <div class="actions">
-	            <input class="btn btn-primary" name="reqform" type="submit" value="Submit" />
+	            <input class="btn btn-inverse" name="reqform" type="submit" value="Submit" />
 	            <a class="btn close-dialog" href="#">Cancel</a>
 	        </div>
         </fieldset>
-    </form>
-  </div>
+      </form>
+    </div>
 </div>
   
  

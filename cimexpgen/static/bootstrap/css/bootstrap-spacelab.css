@@ -5222,3 +5222,9 @@ div.subnav .nav > li.dropdown.open > .dropdown-toggle:hover {
 .affix {
   position: fixed;
 }
+
+
+/* ! My additions */
+.center {
+    text-align:center;
+}

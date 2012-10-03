@@ -1,6 +1,20 @@
-{% extends "page_without_submenu.html" %}
+{% extends "two_column_page.html" %}
     
-    {% block pagecontent %}
-      {{ message }}
+    {% block page_column_one %}
+        The CIM Experiment Manager is a tool to edit CIM experiment 
+        documents. The CIM, or 'Common Information Model' is a standard for 
+        the documentation of Climate modelling workflow.
+    {% endblock %}
+    
+    {% block page_column_two %}
+        <div class="row">
+          {% if user.is_authenticated %}
+            <br/>
+            <a href="{{ urls.explist }}" class="btn btn-success btn-block"><strong>Continue to account</strong></a>
+          {% else %}
+            <br/>  
+            <a href="/login/" class="btn btn-success btn-block"><strong>Login</strong></a>
+          {% endif %}           
+        </div>
     {% endblock %}
 

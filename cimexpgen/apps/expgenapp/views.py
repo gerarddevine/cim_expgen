@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.template.context import RequestContext
+from django.contrib.auth.decorators import login_required
 
 from apps.expgenapp.models import Experiment
 from apps.expgenapp.models import NumericalRequirement
@@ -74,6 +75,7 @@ def modalform1(request):
                               context_instance=RequestContext(request))
 
 
+@login_required
 def explist(request):
     '''
     controller for experiment list page .
@@ -100,6 +102,7 @@ def explist(request):
                                 context_instance=RequestContext(request))
 
 
+@login_required
 def expview(request, expid):
     '''
     controller for individual experiment view page
@@ -125,6 +128,7 @@ def expview(request, expid):
                                 context_instance=RequestContext(request))
 
 
+@login_required
 def expcopy(request, expid):
     '''
     controller for individual experiment copy page
@@ -140,6 +144,7 @@ def expcopy(request, expid):
     return HttpResponseRedirect(urls['explist']) # Redirect after POST
 
 
+@login_required
 def expdelete(request, expid):
     '''
     controller for individual experiment delete page
@@ -154,6 +159,7 @@ def expdelete(request, expid):
     return HttpResponseRedirect(urls['explist']) # Redirect after POST
          
 
+@login_required
 def expedit(request, expid=None):
     '''
     controller for individual experiment edit page
@@ -172,7 +178,7 @@ def expedit(request, expid=None):
     if request.method == 'POST':
         cancel = request.POST.get('cancel', None)
         if cancel:
-            return HttpResponseRedirect(urls['explist'])
+            return HttpResponseRedirect(urls['expview'])
         else:
             #urls['self']=reverse('apps.expgenapp.views.expedit', args=(exp.id, )) 
         
@@ -205,6 +211,7 @@ def expedit(request, expid=None):
                                 context_instance=RequestContext(request))
 
 
+@login_required
 def exppub(request, expid):
     '''
     controller for individual experiment publish page
@@ -216,6 +223,7 @@ def exppub(request, expid):
     return HttpResponse(cim, mimetype)
     
 
+@login_required
 def reqlist(request):
     '''
     controller for requirement list page
