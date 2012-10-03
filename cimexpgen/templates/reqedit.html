@@ -1,22 +1,20 @@
-{% extends "page_with_submenu.html" %}
+{% extends "two_column_page_wideleft.html" %}
 
-{% block pagecontent %}
-
-<br/>
-
-<div class="row">
-  <div class="span12">   
-    {% if reqform.instance.abbrev %}
-      <legend>Edit Requirement {{reqform.instance.abbrev}}</legend>
-    {% else %}
-      <legend>Edit New Requirement</legend>
-    {% endif %}
-  </div>
-</div>
-
-{% if reqform.errors%} 
-    <div class="row">
-        <div class="offset2 span8">
+{% block page_top_menu %}
+    
+    {% include 'pagemenu.html' %}
+    
+    <div class="page-header">   
+      {% if reqform.instance.abbrev %}
+        <h3>Edit Requirement <strong>{{reqform.instance.abbrev}}</strong></h3>
+      {% else %}
+        <h3>Edit New Requirement</h3>
+      {% endif %}
+    </div>
+    
+    {% if reqform.errors%} 
+      <div class="row">
+        <div class="offset1 span10">
             <div class="alert alert-error ">
               {% if reqform.non_field_errors %}
                 <p>{{ reqform.non_field_errors }}</p>
@@ -25,14 +23,16 @@
               {% endif %}
             </div>
         </div>
-    </div>
-{% endif %}
+      </div>
+    {% endif %}
+  
+{% endblock %}
 
-<br/>
-     
+
+{% block page_column_one %}
+
   <div class="row">
-    <div class="offset4 span4">
-      <form action="{{ urls.reqedit }}" method="POST" class="form-horizontal well">
+      <form action="{{ urls.reqedit }}" method="POST" class="form-horizontal">
         {% csrf_token %}
            
             <div>

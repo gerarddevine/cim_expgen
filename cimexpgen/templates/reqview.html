@@ -1,61 +1,73 @@
-{% extends "page_with_submenu.html" %}
+{% extends "two_column_page_wideleft.html" %}
 
-{% block pagecontent %}
 
-<section id="views">
-  <div class="row">
-    <div class="span12">   
-       <legend>Requirement {{req.name}}</legend>
+{% block page_top_menu %}
+
+    {% include 'pagemenu.html' %}
+    
+    <div class="page-header">
+      <h3>Requirement <strong>{{req.name}}</strong></h3>
     </div>
-  </div>
-  <br/>
+  
+{% endblock %}
+
+
+{% block page_column_one %}
+
   <div class="row">
-    <div class="span2 offset2">
+    <div class="span2">
       <strong>Name</strong>
     </div>
-    <div class="span2">
+    <div class="span4">
       {{ req.name }}
     </div>
   </div>
   <br/>
+  
   <div class="row">
-    <div class="span2 offset2">
+    <div class="span2">
       <strong>Doc ID</strong>
     </div>
-    <div class="span2">
+    <div class="span4">
       {{ req.docid }}
     </div>
   </div>
   <br/>
+  
   <div class="row">
-    <div class="span2 offset2">
+    <div class="span2">
       <strong>Description</strong>
     </div>
-    <div class="span2">
+    <div class="span4">
       {{ req.description }}
     </div>
   </div>
   <br/>
+  
   <div class="row">
-    <div class="span2 offset2">
+    <div class="span2">
       <strong>Requirement Type</strong>
     </div>
-    <div class="span2">
+    <div class="span4">
       {{ req.reqtype }}
     </div>
   </div>   
   <br/>
+  
+{% endblock %} 
+
+
+{% block page_column_two %}
+  
   <div class="row">
-    <div class="span2 offset10">
-      <a href="{{ urls.reqedit }}" class="btn btn-primary"><span class="bt_green_lft"></span><strong>Edit this Requirement</strong><span class="bt_green_r"></span></a>
-    </div>
+      <a href="{{ urls.reqedit }}" class="btn btn-success btn-block"><strong>Edit this Requirement</strong></a>
   </div>
   <br/>
+  
   <div class="row">
-    <div class="span2 offset10">
+    <div class="center">
       <a href="{{ urls.reqlist }}">..or return to requirement list</a>                             
     </div>
   </div>
-</section>
 
 {% endblock %}      

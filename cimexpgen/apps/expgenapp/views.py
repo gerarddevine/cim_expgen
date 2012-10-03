@@ -13,64 +13,35 @@ from apps.helpers import genurls
 
 
 def home(request):
+    '''Controller for app home page
     '''
-    controller for app home page
-    '''
-    
     try:
         # get my urls
         urls = genurls()
-        
         message = 'Some introductory text will go here'
-        
     except:
         raise Http404
-    
-    return render_to_response('home.html', {'message':message, 'urls':urls}, 
-                               context_instance=RequestContext(request))
+    return render_to_response('home.html', {'message': message, 'urls': urls},
+                              context_instance=RequestContext(request))
 
 
 def about(request):
+    '''Controller for app about page
     '''
-    controller for app about page
-    '''
-    
     try:
         # get my urls
         urls = genurls()
-        
         message = 'About page will go here'
-        
     except:
         raise Http404
-    
-    return render_to_response('about.html', {'message':message, 'urls':urls},
+    return render_to_response('about.html', {'message': message, 'urls': urls},
                               context_instance=RequestContext(request))
-
-#
-#def login(request):
-#    '''
-#    controller for app login page
-#    '''
-#    
-#    try:
-#        # get my urls
-#        urls = genurls(
-#                       )
-#        message = 'Login page will go here'
-#        
-#    except:
-#        raise Http404
-#    
-#    return render_to_response('login.html', {'message':message, 'urls':urls},
-#                              context_instance=RequestContext(request))
 
 
 def modalform1(request):
     '''
     controller for app about page
     '''
-    
     return render_to_response('modalform1.html', {},
                               context_instance=RequestContext(request))
 
@@ -80,25 +51,23 @@ def explist(request):
     '''
     controller for experiment list page .
     '''
-    
     try:
         # get my urls
         urls = genurls()
-        urls['modalform1']=reverse('cimexpgen.apps.expgenapp.views.modalform1', 
+        urls['modalform1'] = reverse('cimexpgen.apps.expgenapp.views.modalform1',
                                    args=())
-                
         allexps = Experiment.objects.all()
         for exp in allexps:
-            exp.url = reverse('cimexpgen.apps.expgenapp.views.expview', 
+            exp.url = reverse('cimexpgen.apps.expgenapp.views.expview',
                               args=(exp.id, ))
-            exp.cpurl = reverse('cimexpgen.apps.expgenapp.views.expcopy', 
+            exp.cpurl = reverse('cimexpgen.apps.expgenapp.views.expcopy',
                               args=(exp.id, ))
-            exp.delurl = reverse('cimexpgen.apps.expgenapp.views.expdelete', 
+            exp.delurl = reverse('cimexpgen.apps.expgenapp.views.expdelete',
                               args=(exp.id, ))
     except:
         raise Http404
-    
-    return render_to_response('explist.html', {'allexps':allexps, 'urls':urls}, 
+    return render_to_response('explist.html', {'allexps': allexps,
+                                               'urls': urls},
                                 context_instance=RequestContext(request))
 
 
@@ -170,7 +139,6 @@ def expedit(request, expid=None):
     else: 
         exp = Experiment()
         
-    
     # get my urls
     urls = genurls()
     
@@ -178,7 +146,11 @@ def expedit(request, expid=None):
     if request.method == 'POST':
         cancel = request.POST.get('cancel', None)
         if cancel:
-            return HttpResponseRedirect(urls['expview'])
+            if expid:  # reroute back to view page
+                urls['expview']=reverse('cimexpgen.apps.expgenapp.views.expview',args=(exp.id, ))
+                return HttpResponseRedirect(urls['expview'])
+            else:  # reroute back to exp list page
+                return HttpResponseRedirect(urls['explist'])
         else:
             #urls['self']=reverse('apps.expgenapp.views.expedit', args=(exp.id, )) 
         
