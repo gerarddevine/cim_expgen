@@ -26,14 +26,22 @@
 			{% csrf_token %} 
 			
 			<div>
-			    {% if form.username.errors %} <p class="error">{{ form.username.errors }}</p> {% endif %}
-			    <p><label for="username"{% if form.username.errors %} class="error"{% endif %}>Username:</label></p>
+			    {% if form.username.errors %} 
+			      {% for error in form.username.errors %}
+			        <p class="text-error">{{ error }}</p> 
+			      {% endfor %}
+			    {% endif %}
+			    <p><label for="username"{% if form.username.errors %} class="text-error"{% endif %}>Username:</label></p>
 			    <p>{{ form.username }}</p>
 			</div>
 			
 			<div>
-			    {% if form.password.errors %} <p class="error">{{ form.password.errors }}</p> {% endif %}
-			    <p><label for="password"{% if form.password.errors %} class="error"{% endif %}>Password:</label></p>
+			    {% if form.password.errors %} 
+			      {% for error in form.password.errors %}
+			        <p class="text-error">{{ error }}</p>
+			      {% endfor %} 
+			    {% endif %}
+			    <p><label for="password"{% if form.password.errors %} class="text-error"{% endif %}>Password:</label></p>
 			    <p>{{ form.password }}</p>
 			</div>
 			<br/>

@@ -32,147 +32,157 @@
 
 {% block page_column_one %}
 
-    <div class="row">
       <form action="{{ urls.expedit }}" method="POST" class="form-horizontal">
         {% csrf_token %}
-                    
-            <div class="span2">
-              <label for="abbrev"{% if expform.name.errors %} class="error" {% endif %}>Abbreviation</label>
-            </div>
-            <div class="span3">
-              <p>{{ expform.abbrev }}</p>
-            </div>
-            <div class="span2">
+            
+            <div class="row">        
+              <div class="span2">
+                <label for="abbrev"{% if expform.abbrev.errors %} class="text-error" {% endif %}>Abbreviation</label>
+              </div>
+              <div class="span3">
+                {{ expform.abbrev }}
+              </div>
+              <div class="span2">
               {% if expform.abbrev.errors %}
                 {% for error in expform.abbrev.errors %}
-                    {{ error }}
+                    <p class="text-error">{{ error }}</p>
                 {% endfor %}
               {% endif %}
+              </div>
             </div>
             <br/>
             
-            <!--
-            <div class="span2">
-              {% if expform.title.errors %}
-                {% for error in expform.title.errors %} 
-                    <p class="error"> 
-                      {{ error }}
-                    </p>
-                {% endfor %} 
-              {% endif %}
-              <label for="title"{% if expform.title.errors %} class="error" {% endif %}>Title</label>
-            </div>
-            <div class="span4">
-              <p>{{ expform.title }}</p>
-            </div>
-            
-            <div class="span2">
-              {% if expform.author.errors %}
-                {% for error in expform.author.errors %} 
-                    <p class="error"> 
-                      {{ error }}
-                    </p>
-                {% endfor %} 
-              {% endif %}
-              <label for="author"{% if expform.author.errors %} class="error" {% endif %}>Author</label>
-            </div>
-            <div class="span4">
-              <p>{{ expform.author }}</p>
+            <div class="row">
+              <div class="span2">
+                <label for="title"{% if expform.title.errors %} class="text-error" {% endif %}>Title</label>
+              </div>
+              <div class="span3">
+                {{ expform.title }}
+              </div>
+              <div class="span2">
+                {% if expform.title.errors %}
+                  {% for error in expform.title.errors %}
+                    <p class="text-error">{{ error }}</p>
+                  {% endfor %}
+                {% endif %}
+              </div>
             </div>
             <br/>
             
-            <div class="span2">
-              {% if expform.project.errors %}
-                {% for error in expform.project.errors %} 
-                    <p class="error"> 
-                      {{ error }}
-                    </p>
-                {% endfor %} 
-              {% endif %}
-              <label for="project"{% if expform.project.errors %} class="error" {% endif %}>Project</label>
-            </div>
-            <div class="span4">
-              {{ expform.project }}
+            <div class="row">
+              <div class="span2">
+                <label for="author"{% if expform.author.errors %} class="error" {% endif %}>Author</label>
+              </div>
+              <div class="span3">
+                {{ expform.author }}
+              </div>
+              <div class="span2">
+                {% if expform.author.errors %}
+                  {% for error in expform.author.errors %} 
+                    <p class="text-error">{{ error }}</p>
+                  {% endfor %} 
+                {% endif %}
+              </div>
             </div>
             <br/>
             
-            <div class="span2">
-              {% if expform.description.errors %}
-                {% for error in expform.description.errors %} 
-                    <p class="error"> 
-                      {{ error }}
-                    </p>
-                {% endfor %} 
-              {% endif %}
-              <p>
+            <div class="row">
+              <div class="span2">
+                <label for="project"{% if expform.project.errors %} class="error" {% endif %}>Project</label>
+              </div>
+              <div class="span3">
+                {{ expform.project }}
+              </div>
+              <div class="span2">
+                {% if expform.project.errors %}
+                  {% for error in expform.project.errors %} 
+                    <p class="text-error">{{ error }}</p>
+                  {% endfor %} 
+                {% endif %}
+              </div>
+            </div>
+            <br/>
+            
+            <div class="row">
+              <div class="span2">
                 <label for="description"{% if expform.description.errors %} class="error" {% endif %}>Description</label>
-              </p>
+              </div>
+              <div class="span3">
+                {{ expform.description }}
+              </div>
+              <div class="span2">
+                {% if expform.description.errors %}
+                  {% for error in expform.description.errors %} 
+                    <p class="text-error">{{ error }}</p>
+                  {% endfor %} 
+                {% endif %}
+              </div>
             </div>
-            <div class="span4">
-              <p>{{ expform.description }}</p>
-            </div>
+            <br/>
             
-            <div class="span2">
-              {% if expform.rationale.errors %}
-                {% for error in expform.rationale.errors %} 
-                    <p class="error"> 
-                      {{ error }}
-                    </p>
-                {% endfor %} 
-              {% endif %}
-              <p>
+            <div class="row">
+              <div class="span2">
                 <label for="rationale"{% if expform.rationale.errors %} class="error" {% endif %}>Rationale</label>
-              </p>
+              </div>
+              <div class="span3">
+                {{ expform.rationale }}
+              </div>
+              <div class="span2">
+                {% if expform.rationale.errors %}
+                  {% for error in expform.rationale.errors %} 
+                    <p class="text-error">{{ error }}</p>
+                  {% endfor %} 
+                {% endif %}
+              </div>
             </div>
-            <div class="span4">
-              <p>{{ expform.rationale }}</p>
-            </div>
+            <br/>
             
-            <div class="span2">
-              {% if expform.control.errors %}
-                {% for error in expform.control.errors %} 
-                    <p class="error"> 
-                      {{ error }}
-                    </p>
-                {% endfor %} 
-              {% endif %}
-              <p>
-                <label for="control"{% if expform.control.errors %} class="error" {% endif %}>Control?</label>
-              </p>
+            <div class="row">
+              <div class="span2">
+                <label for="control"{% if expform.control.errors %} class="text-error" {% endif %}>Control?</label>
+              </div>
+              <div class="span3">
+                {{ expform.control }}
+              </div>
+              <div class="span2">
+                {% if expform.control.errors %}
+                  {% for error in expform.control.errors %} 
+                    <p class="text-error">{{ error }}</p>
+                  {% endfor %} 
+                {% endif %}
+              </div>
             </div>
-            <div class="span4">
-              <p>{{ expform.control }}</p>
-            </div>
+            <br/>
             
-            <div class="span2">
-              {% if expform.requirements.errors %}
-                {% for error in expform.requirements.errors %} 
-                    <p class="error"> 
-                      {{ error }}
-                    </p>
-                {% endfor %} 
-              {% endif %}
-              <p>
+            <div class="row">
+              <div class="span2">
                 <label for="reqs"{% if expform.requirements.errors %} class="error" {% endif %}>Associated requirements</label>
-              </p>
+              </div>
+              <div class="span3">
+                {{ expform.requirements }}
+                <a class="btn" data-toggle="modal" href="#myModal" >Add new</a>
+              </div>
+              <div class="span2">
+                {% if expform.requirements.errors %}
+                  {% for error in expform.requirements.errors %} 
+                    <p class="text-error">{{ error }}</p>
+                  {% endfor %} 
+                {% endif %}
+              </div>
             </div>
-            <div class="span4">
-              <p>{{ expform.requirements }}
-              <a class="btn" data-toggle="modal" href="#myModal" >Add new requirement</a>
-              </>
-            </div> 
-            
-            -->
-            
-        </div>
+            <br/>   
+      
 {% endblock %} 
 
 
 {% block page_column_two %}
 	   
-	  <div class="row"><button type="submit" name="expform" class="btn btn-success btn-block"><strong>Save changes</strong></button>
-        <button name="cancel" type="submit" value="Cancel" class="btn btn-block"><strong>Cancel</strong></button>
-	  </div>
+  <div class="row">
+    <div class="span3">
+      <button type="submit" name="expform" class="btn btn-success btn-block"><strong>Save changes</strong></button>
+      <button name="cancel" type="submit" value="Cancel" class="btn btn-block"><strong>Cancel</strong></button>
+    </div>
+  </div>
   
   </form>
   
@@ -216,7 +226,7 @@
         </fieldset>
       </form>
     </div>
-</div>
+  </div>
   
  
 {% endblock %}

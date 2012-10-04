@@ -1,5 +1,6 @@
 {% extends "two_column_page_wideleft.html" %}
 
+
 {% block page_top_menu %}
     
     {% include 'pagemenu.html' %}
@@ -31,74 +32,89 @@
 
 {% block page_column_one %}
 
-  <div class="row">
       <form action="{{ urls.reqedit }}" method="POST" class="form-horizontal">
         {% csrf_token %}
            
-            <div>
+            <div class="row">        
+              <div class="span2">
+                <label for="name"{% if reqform.name.errors %} class="text-error" {% endif %}>Name</label>
+              </div>
+              <div class="span3">
+                {{ reqform.name }}
+              </div>
+              <div class="span2">
               {% if reqform.name.errors %}
-                {% for error in reqform.name.errors %} 
-                    <p class="error"> 
-                        {{ error }}
-                    </p>
-                {% endfor %} 
+                {% for error in reqform.name.errors %}
+                    <p class="text-error">{{ error }}</p>
+                {% endfor %}
               {% endif %}
-              <p>
-                <label for="name"{% if reqform.name.errors %} class="error" {% endif %}>Name</label>
-              </p>
-              <p>{{ reqform.name }}</p>
+              </div>
             </div>
+            <br/>
             
-            <div>
+            <div class="row">        
+              <div class="span2">
+                <label for="docid"{% if reqform.docid.errors %} class="text-error" {% endif %}>Doc ID</label>
+              </div>
+              <div class="span3">
+                {{ reqform.docid }}
+              </div>
+              <div class="span2">
               {% if reqform.docid.errors %}
-                {% for error in reqform.docid.errors %} 
-                    <p class="error"> 
-                        {{ error }}
-                    </p>
-                {% endfor %} 
+                {% for error in reqform.docid.errors %}
+                    <p class="text-error">{{ error }}</p>
+                {% endfor %}
               {% endif %}
-              <p>
-                <label for="docid"{% if reqform.docid.errors %} class="error" {% endif %}>Doc ID</label>
-              </p>
-              <p>{{ reqform.docid }}</p>
-            </div> 
-            
-            <div>
-              {% if reqform.reqtype.errors %}
-                {% for error in reqform.reqtype.errors %} 
-                    <p class="error"> 
-                        {{ error }}
-                    </p>
-                {% endfor %} 
-              {% endif %}
-              <p>
-                <label for="reqtype"{% if reqform.rectype.errors %} class="error" {% endif %}>Requirement Type</label>
-              </p>
-              <p>{{ reqform.reqtype }}</p>
-            </div>          
-            
-            <div>
-              {% if reqform.description.errors %}
-                {% for error in reqform.description.errors %} 
-                    <p class="error"> 
-                        {{ error }}
-                    </p>
-                {% endfor %} 
-              {% endif %}
-              <p>
-                <label for="description"{% if reqform.description.errors %} class="error" {% endif %}>Description</label>
-              </p>
-              <p>{{ reqform.description }}</p>
+              </div>
             </div>
-          
-          <br/>      
-          <div class="actions">
-            <button name="cancel" type="submit" value="Cancel" class="btn btn-block">Cancel</button>
-            <button type="submit" name="reqform" class="btn btn-primary btn-block">Save changes</button>
-          </div>
-          
-      </form>
+            <br/>
+            
+            <div class="row">        
+              <div class="span2">
+                <label for="rectype"{% if reqform.reqtype.errors %} class="text-error" {% endif %}>Requirement Type</label>
+              </div>
+              <div class="span3">
+                {{ reqform.reqtype }}
+              </div>
+              <div class="span2">
+              {% if reqform.reqtype.errors %}
+                {% for error in reqform.reqtype.errors %}
+                    <p class="text-error">{{ error }}</p>
+                {% endfor %}
+              {% endif %}
+              </div>
+            </div>
+            <br/>
+            
+            <div class="row">        
+              <div class="span2">
+                <label for="descripton"{% if reqform.description.errors %} class="text-error" {% endif %}>Name</label>
+              </div>
+              <div class="span3">
+                {{ reqform.description }}
+              </div>
+              <div class="span2">
+              {% if reqform.description.errors %}
+                {% for error in reqform.description.errors %}
+                    <p class="text-error">{{ error }}</p>
+                {% endfor %}
+              {% endif %}
+              </div>
+            </div>
+            <br/>
+    
+{% endblock %}
+
+
+{% block page_column_two %}
+
+  <div class="row">
+    <div class="span3">
+      <button type="submit" name="reqform" class="btn btn-success btn-block"><strong>Save changes</strong></button>
+      <button name="cancel" type="submit" value="Cancel" class="btn btn-block"><strong>Cancel</strong></button>          
     </div>
   </div>
-    
+
+  </form>
+  
 {% endblock %}
