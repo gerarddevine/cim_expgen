@@ -151,9 +151,7 @@ def expedit(request, expid=None):
                 return HttpResponseRedirect(urls['expview'])
             else:  # reroute back to exp list page
                 return HttpResponseRedirect(urls['explist'])
-        else:
-            #urls['self']=reverse('apps.expgenapp.views.expedit', args=(exp.id, )) 
-        
+        else:        
             if 'expform' in request.POST:
                 expform = ExperimentForm(request.POST, instance=exp, prefix='exp') 
                 if expform.is_valid(): 
@@ -161,8 +159,6 @@ def expedit(request, expid=None):
                     return HttpResponseRedirect(urls['explist']) # Redirect to list page 
                 else:
                     return render_to_response('expedit.html', {'expform': expform, 'urls':urls}, context_instance=RequestContext(request))
-            
-                #return HttpResponseRedirect(urls['explist']) # Redirect to list page
             elif 'reqform' in request.POST:
                 reqform = RequirementForm(request.POST, 
                                           instance=NumericalRequirement(), 
@@ -219,7 +215,7 @@ def reqlist(request):
                                        context_instance=RequestContext(request))
 
 
-
+@login_required
 def reqview(request, reqid):
     '''
     controller for individual requirement view page
@@ -235,7 +231,7 @@ def reqview(request, reqid):
                                 context_instance=RequestContext(request))
 
 
-
+@login_required
 def reqedit(request, reqid=None):
     '''
     controller for individual numerical requirement edit page
@@ -252,19 +248,26 @@ def reqedit(request, reqid=None):
     if request.method == 'POST': 
         cancel = request.POST.get('cancel', None)
         if cancel:
-            return HttpResponseRedirect(urls['reqlist'])
-        else:
-            form = RequirementForm(request.POST, instance=req)
-            if form.is_valid():
-                form.save()
+            if reqid:  # reroute back to view page
+                urls['reqview']=reverse('cimexpgen.apps.expgenapp.views.reqview', args=(req.id, ))
+                return HttpResponseRedirect(urls['reqview'])
+            else:  # reroute back to req list page
+                return HttpResponseRedirect(urls['reqlist'])
+        else:          
+            reqform = RequirementForm(request.POST, instance=req)
+            if reqform.is_valid():
+                reqform.save()
                 return HttpResponseRedirect(urls['reqlist']) # Redirect after POST
+            else:
+                return render_to_response('reqedit.html', {'reqform': reqform, 'urls':urls}, context_instance=RequestContext(request))
     else:
-        form = RequirementForm(instance=req) # An unbound form
+        reqform = RequirementForm(instance=req) # An unbound form
 
-    return render_to_response('reqedit.html', {'reqform': form, 'urls':urls}, 
+    return render_to_response('reqedit.html', {'reqform': reqform, 'urls':urls}, 
                                 context_instance=RequestContext(request))
 
 
+@login_required
 def reqdelete(request, reqid=None):
     '''
     controller for deleting an individual requirement
@@ -280,6 +283,7 @@ def reqdelete(request, reqid=None):
     return HttpResponseRedirect(urls['reqlist'])
 
 
+@login_required
 def importcim(request):
     '''
     controller for importing CIM document

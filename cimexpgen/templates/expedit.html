@@ -159,7 +159,9 @@
                 <label for="reqs"{% if expform.requirements.errors %} class="error" {% endif %}>Associated requirements</label>
               </div>
               <div class="span3">
-                {{ expform.requirements }}
+                <div style="height: 10em; width: 16em; overflow: auto;">
+                  {{ expform.requirements }}
+                </div>
                 <a class="btn" data-toggle="modal" href="#myModal" >Add new</a>
               </div>
               <div class="span2">

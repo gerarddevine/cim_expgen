@@ -27,71 +27,71 @@
 		<div>
 		    {% if form.name.errors %}
 	            {% for error in form.name.errors %} 
-                    <p class="error"> 
+                    <p class="text-error"> 
 	                    {{ error }}
 	                </p>
 	            {% endfor %} 
 		    {% endif %}
-		    <p><label for="name"{% if form.name.errors %} class="error"{% else %} {% endif %}>Name</label></p>
+		    <p><label for="name"{% if form.name.errors %} class="text-error"{% else %} {% endif %}>Name</label></p>
 		    <p>{{ form.name }}</p>
 		</div>
 		
 		<div>
 		    {% if form.institute.errors %} 
 		        {% for error in form.institute.errors %} 
-                    <p class="error"> 
+                    <p class="text-error"> 
                         {{ error }}
                     </p>
                 {% endfor %} {% endif %}
-		    <p><label for="institute"{% if form.institute.errors %} class="error"{% endif %}>Institute:</label></p>
+		    <p><label for="institute"{% if form.institute.errors %} class="text-error"{% endif %}>Institute:</label></p>
 		    <p>{{ form.institute }}</p>
 		</div>
 		
 		<div>
 		    {% if form.email.errors %} 
 	            {% for error in form.email.errors %} 
-	                <p class="error"> 
+	                <p class="text-error"> 
 	                    {{ error }}
 	                </p>
 	            {% endfor %} 
             {% endif %}
-		    <p><label for="email"{% if form.email.errors %} class="error"{% endif %}>Email:</label></p>
+		    <p><label for="email"{% if form.email.errors %} class="text-error"{% endif %}>Email:</label></p>
 		    <p>{{ form.email }}</p>
 		</div>
 		
 		<div>
 		    {% if form.username.errors %} 
 		        {% for error in form.username.errors %} 
-                    <p class="error"> 
+                    <p class="text-error"> 
                         {{ error }}
                     </p>
                 {% endfor %}  
 		    {% endif %}
-		    <p><label for="username"{% if form.username.errors %} class="error"{% endif %}>Username:</label></p>
+		    <p><label for="username"{% if form.username.errors %} class="text-error"{% endif %}>Username:</label></p>
 		    <p>{{ form.username }}</p>
 		</div>
 		
 		<div>
 		    {% if form.password1.errors %}
 		        {% for error in form.password1.errors %} 
-                    <p class="error"> 
+                    <p class="text-error"> 
                         {{ error }}
                     </p>
                 {% endfor %}  
             {% endif %}
-		    <p><label for="password1"{% if form.password1.errors %} class="error"{% endif %}>Password:</label></p>
+		    <p><label for="password1"{% if form.password1.errors %} class="text-error"{% endif %}>Password:</label></p>
 		    <p>{{ form.password1 }}</p>
 		</div>
 		
 		<div>
 		    {% if form.password2.errors %} 
 		        {% for error in form.password2.errors %} 
-                    <p class="error"> 
+                    <p class="text-error"> 
                         {{ error }}
                     </p>
                 {% endfor %}  
 		    {% endif %}
-		    <p><label for="password2"{% if form.password2.errors %} class="error"{% endif %}>Re-enter Password:</label></p>
+		    <p><label for="password2"{% if form.password2.errors %} class="text-error"{% endif %}>Re-enter Password:</label></p>
 		    <p>{{ form.password2 }}</p>
 		</div>
 		

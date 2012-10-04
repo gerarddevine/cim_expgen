@@ -33,7 +33,7 @@
               <td>{{ exp.updated }}</td>
               <td><a href="{{exp.url}}"><i class="icon-search" title="View"></i></a></td>
               <td><a href="{{exp.cpurl}}"><i class="icon-share-alt" title="Copy"></i></a></td>
-              <td><a href="{{exp.delurl}}"><i class="icon-trash" title="Delete"></i></a></td>
+              <td><a href="{{exp.delurl}}"><i class="icon-trash" data-toggle="myModal" title="Delete"></i></a></td>
             </tr>
           {% endfor %}
         </tbody>
@@ -49,15 +49,15 @@
   
   <div class="modal hide" id="myModal">
     <div class="modal-header">
-    <a class="close" data-dismiss="modal">×</a>
-    <h3>Modal header</h3>
+      <a class="close" data-dismiss="modal">×</a>
+      <h3>Modal header</h3>
     </div>
     <div class="modal-body">
-    <p>One fine body…</p>
+      <p>One fine body…</p>
     </div>
     <div class="modal-footer">
-    <a href="#" class="btn" data-dismiss="modal">Close</a>
-    <a href="#" class="btn btn-success">Save changes</a>
+      <a href="#" class="btn" data-dismiss="modal">Close</a>
+      <a href="#" class="btn btn-success">Save changes</a>
     </div>
   </div>
   

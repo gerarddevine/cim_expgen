@@ -4,8 +4,9 @@ Created on 17 Aug 2011
 @author: gerarddevine
 '''
 
-from django.forms import ModelForm
 from django import forms
+from django.forms import ModelForm
+from django.forms.widgets import CheckboxSelectMultiple
 
 from apps.expgenapp.models import Experiment, NumericalRequirement
 
@@ -13,6 +14,10 @@ from apps.expgenapp.models import Experiment, NumericalRequirement
 class ExperimentForm(ModelForm):
     class Meta:
         model = Experiment 
+        widgets = {
+            'requirements': CheckboxSelectMultiple(),
+        } 
+        #requirements = forms.ModelMultipleChoiceField(queryset=NumericalRequirement.objects.all())
         
         
 class RequirementForm(ModelForm):
