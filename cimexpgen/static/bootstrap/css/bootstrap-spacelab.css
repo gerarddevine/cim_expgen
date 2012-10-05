@@ -5224,7 +5224,13 @@ div.subnav .nav > li.dropdown.open > .dropdown-toggle:hover {
 }
 
 
+*/---------------------------------------------------------------------------*/
 /* ! My additions */
+*/---------------------------------------------------------------------------*/
+
 .center {
-    text-align:center;
+    text-align: center;
+}
+.justify {
+    text-align: justify;
 }

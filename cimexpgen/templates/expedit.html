@@ -37,7 +37,7 @@
             
             <div class="row">        
               <div class="span2">
-                <label for="abbrev"{% if expform.abbrev.errors %} class="text-error" {% endif %}>Abbreviation</label>
+                <label for="abbrev"{% if expform.abbrev.errors %} class="text-error" {% endif %}>Abbreviation {% if expform.fields.abbrev.required %}*{% endif %}</label>
               </div>
               <div class="span3">
                 {{ expform.abbrev }}
@@ -54,7 +54,7 @@
             
             <div class="row">
               <div class="span2">
-                <label for="title"{% if expform.title.errors %} class="text-error" {% endif %}>Title</label>
+                <label for="title"{% if expform.title.errors %} class="text-error" {% endif %}>Title {% if expform.fields.title.required %}*{% endif %}</label>
               </div>
               <div class="span3">
                 {{ expform.title }}
@@ -71,7 +71,7 @@
             
             <div class="row">
               <div class="span2">
-                <label for="author"{% if expform.author.errors %} class="error" {% endif %}>Author</label>
+                <label for="author"{% if expform.author.errors %} class="error" {% endif %}>Author {% if expform.fields.author.required %}*{% endif %}</label>
               </div>
               <div class="span3">
                 {{ expform.author }}
@@ -88,7 +88,7 @@
             
             <div class="row">
               <div class="span2">
-                <label for="project"{% if expform.project.errors %} class="error" {% endif %}>Project</label>
+                <label for="project"{% if expform.project.errors %} class="error" {% endif %}>Project {% if expform.fields.project.required %}*{% endif %}</label>
               </div>
               <div class="span3">
                 {{ expform.project }}
@@ -105,7 +105,7 @@
             
             <div class="row">
               <div class="span2">
-                <label for="description"{% if expform.description.errors %} class="error" {% endif %}>Description</label>
+                <label for="description"{% if expform.description.errors %} class="error" {% endif %}>Description {% if expform.fields.description.required %}*{% endif %}</label>
               </div>
               <div class="span3">
                 {{ expform.description }}
@@ -122,7 +122,7 @@
             
             <div class="row">
               <div class="span2">
-                <label for="rationale"{% if expform.rationale.errors %} class="error" {% endif %}>Rationale</label>
+                <label for="rationale"{% if expform.rationale.errors %} class="error" {% endif %}>Rationale {% if expform.fields.rationale.required %}*{% endif %}</label>
               </div>
               <div class="span3">
                 {{ expform.rationale }}
@@ -139,7 +139,7 @@
             
             <div class="row">
               <div class="span2">
-                <label for="control"{% if expform.control.errors %} class="text-error" {% endif %}>Control?</label>
+                <label for="control"{% if expform.control.errors %} class="text-error" {% endif %}>Control? {% if expform.fields.rationale.required %}*{% endif %}</label>
               </div>
               <div class="span3">
                 {{ expform.control }}
@@ -156,7 +156,7 @@
             
             <div class="row">
               <div class="span2">
-                <label for="reqs"{% if expform.requirements.errors %} class="error" {% endif %}>Associated requirements</label>
+                <label for="reqs"{% if expform.requirements.errors %} class="error" {% endif %}>Associated requirements {% if expform.fields.requirements.required %}*{% endif %}</label>
               </div>
               <div class="span3">
                 <div style="height: 10em; width: 16em; overflow: auto;">
