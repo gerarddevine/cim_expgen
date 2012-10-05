@@ -39,4 +39,4 @@ def prepare_deployment():
     local('git add .')
     local('git commit') 
     local('git push origin master')  # Push master to github repository
-
+'''
