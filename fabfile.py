@@ -8,6 +8,7 @@ env.hosts = ['gdevine@puma.nerc.ac.uk']
 
 def gitupdate():
     local("git add .")
+    local("git add -u")
     local("git commit")
     local("git push")
 
