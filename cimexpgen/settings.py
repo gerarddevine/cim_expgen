@@ -98,7 +98,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 AUTH_PROFILE_MODULE = 'person.Person'
 
 # URL for @login_required decorator to use
-LOGIN_URL = '/login' 
+LOGIN_URL = 'cimexpgen/login' 
 
 
 INSTALLED_APPS = (

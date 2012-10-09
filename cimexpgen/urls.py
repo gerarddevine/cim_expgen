@@ -10,10 +10,11 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     
     # home and about pages
+    (r'^$','cimexpgen.apps.expgenapp.views.home', {}, 'home'),
     (r'^home/$','cimexpgen.apps.expgenapp.views.home', {}, 'home'),
     (r'^about/$','cimexpgen.apps.expgenapp.views.about', {}, 'about'),
         
-    #url for user registration/login/logour
+    # for user registration/login/logour
     (r'^register/$', 'cimexpgen.apps.person.views.UserRegistration', {}, 'register'),
     (r'^login/$', 'cimexpgen.apps.person.views.LoginRequest', {}, 'login'),
     (r'^logout/$', 'cimexpgen.apps.person.views.LogoutRequest', {}, 'logout'),
