@@ -21,6 +21,7 @@ def genurls():
     urls['about'] = reverse('about', args=())
     urls['login'] = reverse('login', args=())
     urls['logout'] = reverse('logout', args=())
+    urls['register'] = reverse('register', args=())
     urls['explist'] = reverse('explist', args=())
     urls['expadd'] = reverse('expadd', args=())
     urls['reqlist'] = reverse('cimexpgen.apps.expgenapp.views.reqlist', args=())

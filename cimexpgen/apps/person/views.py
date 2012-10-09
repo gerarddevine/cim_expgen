@@ -61,7 +61,7 @@ def LoginRequest(request):
                 return HttpResponseRedirect(urls['explist'])
             else:
                 error = "Username and Password do not match. Please try again"
-                return render_to_response('login.html', {'form': form, 'error': error}, context_instance=RequestContext(request))
+                return render_to_response('login.html', {'form': form, 'error': error, 'urls': urls}, context_instance=RequestContext(request))
         else:
             return render_to_response('login.html', {'form': form, 'urls': urls}, context_instance=RequestContext(request))        
     else:

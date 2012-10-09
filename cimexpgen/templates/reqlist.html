@@ -17,7 +17,7 @@
             <th>Doc ID</th>
             <th>Type</th>
             <th>Created</th>
-            <th></th>
+            <th>Updated</th>
             <th></th>
           </tr>
         </thead>              
@@ -28,9 +28,9 @@
               <td>{{ req.docid }}</td>
               <td>{{ req.reqtype }}</td>
               <td>{{ req.created }}</td>
-              <td>{{ exp.updated }}</td>
-              <td><a href="{{req.url}}"><i class="icon-search" title="View"></i></a></td>
-              <td><a href="{{req.delurl}}"><i class="icon-trash" title="Delete"></i></a></td>
+              <td>{{ req.updated }}</td>
+              <td><a href="{{ req.url }}"><i class="icon-search" title="View"></i></a></td>
+              <td><a href="{{ req.delurl }}"><i class="icon-trash" title="Delete"></i></a></td>
             </tr>
           {% endfor %}
         </tbody>
