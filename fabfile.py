@@ -1,42 +1,28 @@
+from __future__ import with_statement
 from fabric.api import *
-from os import path
+from fabric.contrib.console import confirm
 
 
-env.user = 'root'
-env.shell = "/bin/bash -c"
-env.hosts = ['server_ip',] # these are defined in your /.ssh/config Host host1, Host host2, etc.
-env.password = "" # at lease for me it's easier to keep my password in the fabfile
+env.hosts = ['gdevine@puma.nerc.ac.uk']
 
 
-### Local tasks
-def commit(message):
-    local('git add .') 
-    _commit = "git commit -a -m '{0}'".format(message)
-    local(_commit)
-    local('git push origin master')
-
-
-### Server tasks
-def reload_server():
-    sudo('invoke-rc.d apache2 reload')
+def gitupdate():
+    local("git add .")
+    local("git commit")
+    local("git push")
 
 
 def deploy():
-    with cd('/home/djangoapp'):
-        sudo('git pull')
-    
-    reload_server
-
-
-#-------------------------------------------------------------
-# New code
-#
-#-------------------------------------------------------------
-
-def prepare_deployment():
-    local('echo "Preparing deployment......."')
-    local('git status')
-    local('git add .')
-    local('git commit') 
-    local('git push origin master')  # Push master to github repository
-'''
+    code_dir = '/home/gdevine/web/prod/cim_expgen'
+    with settings(warn_only=True):
+        if run("test -d %s" % code_dir).failed:
+            print 'YESS, FAILED!!!!!!!!!'
+            run("git clone git@github.com:gerarddevine/cim_expgen.git %s" % code_dir)
+        else:
+            print 'NOOOOO, DIDNT FAIL!!!!!!!!!'
+    with cd(code_dir):
+        print 'HERE!!!!!!!!!'
+        run("pwd")
+        run("ls -la")
+        run("git pull")
+        #run("touch app.wsgi")

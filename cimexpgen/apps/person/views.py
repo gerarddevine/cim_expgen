@@ -9,11 +9,15 @@ from apps.person.models import Person
 
 from apps.helpers import genurls
 
+
 def UserRegistration(request):
     ''' Registers credentials for a user '''
+    
+    # get my urls
+    urls = genurls()
         
     if request.user.is_authenticated():
-        return HttpResponseRedirect('/home/')
+        return HttpResponseRedirect(urls['home'])
     
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
@@ -25,7 +29,7 @@ def UserRegistration(request):
             person = Person(user=user, name=form.cleaned_data['name'], institute=form.cleaned_data['institute'])
             person.save()
             
-            return HttpResponseRedirect('/home/')
+            return HttpResponseRedirect(urls['home'])
         else:
             # get my urls
             urls = genurls()
@@ -40,8 +44,11 @@ def UserRegistration(request):
         
 
 def LoginRequest(request):
+    # get my urls
+    urls = genurls()
+    
     if request.user.is_authenticated():
-        return HttpResponseRedirect('/home/')
+        return HttpResponseRedirect(urls['home'])
     
     if request.method == "POST":
         form = LoginForm(request.POST)
@@ -51,17 +58,14 @@ def LoginRequest(request):
             person = authenticate(username=username, password=password)
             if person is not None:
                 login(request, person)
-                return HttpResponseRedirect('/explist/')
+                return HttpResponseRedirect(urls['explist'])
             else:
                 error = "Username and Password do not match. Please try again"
                 return render_to_response('login.html', {'form': form, 'error': error}, context_instance=RequestContext(request))
         else:
-            # get my urls
-            urls = genurls()
             return render_to_response('login.html', {'form': form, 'urls': urls}, context_instance=RequestContext(request))        
     else:
         ''' user is not submitting the form, therefore show the login form '''
-        urls = genurls()
         form = LoginForm()        
         context = {'form': form, 'urls':urls}
         return render_to_response('login.html', context, context_instance=RequestContext(request))
@@ -69,6 +73,10 @@ def LoginRequest(request):
     
 def LogoutRequest(request):
     logout(request)
-    return HttpResponseRedirect('/home/')
+    
+    # get my urls
+    urls = genurls()
+    
+    return HttpResponseRedirect(urls['explist'])
 
     

@@ -18,10 +18,10 @@ def home(request):
     try:
         # get my urls
         urls = genurls()
-        message = 'Some introductory text will go here'
     except:
         raise Http404
-    return render_to_response('home.html', {'message': message, 'urls': urls},
+    
+    return render_to_response('home.html', {'urls': urls},
                               context_instance=RequestContext(request))
 
 
@@ -31,10 +31,10 @@ def about(request):
     try:
         # get my urls
         urls = genurls()
-        message = 'About page will go here'
     except:
         raise Http404
-    return render_to_response('about.html', {'message': message, 'urls': urls},
+      
+    return render_to_response('about.html', {'urls': urls},
                               context_instance=RequestContext(request))
 
 
