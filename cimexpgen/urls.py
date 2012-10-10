@@ -11,7 +11,6 @@ urlpatterns = patterns('',
     
     # home and about pages
     (r'^$','cimexpgen.apps.expgenapp.views.home', {}, 'home'),
-    (r'^home/$','cimexpgen.apps.expgenapp.views.home', {}, 'home'),
     (r'^about/$','cimexpgen.apps.expgenapp.views.about', {}, 'about'),
         
     # for user registration/login/logour

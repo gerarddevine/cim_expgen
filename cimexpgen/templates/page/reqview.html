@@ -1,9 +1,9 @@
-{% extends "two_column_page_wideleft.html" %}
+{% extends "site/two_column_page_wideleft.html" %}
 
 
 {% block page_top_menu %}
 
-    {% include 'pagemenu.html' %}
+    {% include 'page/pagemenu.html' %}
     
     <div class="page-header">
       <h3>Requirement <strong>{{ req.name }}</strong></h3>
@@ -60,7 +60,7 @@
 {% block page_column_two %}
   
   <div class="row">
-      <a href="{{ urls.reqedit }}" class="btn btn-success btn-block"><strong>Edit this Requirement</strong></a>
+      <a href="{{ urls.reqedit }}" class="btn btn-primary btn-block"><strong>Edit this Requirement</strong></a>
   </div>
   <br/>
   

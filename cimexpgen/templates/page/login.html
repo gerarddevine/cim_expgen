@@ -1,4 +1,4 @@
-{% extends "one_column_page.html" %}
+{% extends "site/one_column_page.html" %}
 
 {% block page_column_one %}
 
@@ -12,7 +12,7 @@
     {% endif %}
   </div>
 {% else %}
-  <div class="alert alert-success">
+  <div class="alert alert-info">
     Log in to your account....
   </div>
 {% endif %}
@@ -47,7 +47,7 @@
 			<br/>
 			<br/>			
 			<div class="actions">
-	            <button type="submit" class="btn btn-inverse btn-block">Login</button>
+	            <button type="submit" class="btn btn-primary btn-block">Login</button>
 	            <a href="{{ urls.register }}" class="btn btn-block"><strong>or Register Account</strong></a>   
 	        </div>
 		</form>

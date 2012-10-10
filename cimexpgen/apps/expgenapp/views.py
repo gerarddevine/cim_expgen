@@ -21,7 +21,7 @@ def home(request):
     except:
         raise Http404
     
-    return render_to_response('home.html', {'urls': urls},
+    return render_to_response('page/home.html', {'urls': urls},
                               context_instance=RequestContext(request))
 
 
@@ -34,15 +34,16 @@ def about(request):
     except:
         raise Http404
       
-    return render_to_response('about.html', {'urls': urls},
+    return render_to_response('page/about.html', {'urls': urls},
                               context_instance=RequestContext(request))
 
 
+# TODO: link this to the template
 def modalform1(request):
     '''
     controller for app about page
     '''
-    return render_to_response('modalform1.html', {},
+    return render_to_response('page/modalform1.html', {},
                               context_instance=RequestContext(request))
 
 
@@ -66,7 +67,7 @@ def explist(request):
                               args=(exp.id, ))
     except:
         raise Http404
-    return render_to_response('explist.html', {'allexps': allexps,
+    return render_to_response('page/explist.html', {'allexps': allexps,
                                                'urls': urls},
                                 context_instance=RequestContext(request))
 
@@ -92,7 +93,7 @@ def expview(request, expid):
                               args=(req.id, ))   
     
     #Send to template
-    return render_to_response('expview.html', 
+    return render_to_response('page/expview.html', 
                               {'exp': exp, 'urls':urls, 'reqs':reqs},
                                 context_instance=RequestContext(request))
 
@@ -172,7 +173,7 @@ def expedit(request, expid=None):
         expform = ExperimentForm(instance=exp, prefix='exp') # An unbound form
         reqform = RequirementForm(prefix='req') # An unbound form
 
-    return render_to_response('expedit.html', 
+    return render_to_response('page/expedit.html', 
                               {'expform': expform,               
                                'reqform': reqform, 
                                'urls':urls},
@@ -211,7 +212,7 @@ def reqlist(request):
     except:
         raise Http404
     
-    return render_to_response('reqlist.html', {'allreqs':allreqs, 'urls':urls}, 
+    return render_to_response('page/reqlist.html', {'allreqs':allreqs, 'urls':urls}, 
                                        context_instance=RequestContext(request))
 
 
@@ -227,7 +228,7 @@ def reqview(request, reqid):
     urls = genurls()
     urls['reqedit']=reverse('cimexpgen.apps.expgenapp.views.reqedit',args=(req.id, ))
          
-    return render_to_response('reqview.html', {'req':req, 'urls':urls}, 
+    return render_to_response('page/reqview.html', {'req':req, 'urls':urls}, 
                                 context_instance=RequestContext(request))
 
 
@@ -263,7 +264,7 @@ def reqedit(request, reqid=None):
     else:
         reqform = RequirementForm(instance=req) # An unbound form
 
-    return render_to_response('reqedit.html', {'reqform': reqform, 'urls':urls}, 
+    return render_to_response('page/reqedit.html', {'reqform': reqform, 'urls':urls}, 
                                 context_instance=RequestContext(request))
 
 
@@ -297,5 +298,5 @@ def importcim(request):
     except:
         raise Http404
     
-    return render_to_response('importcim.html', 
+    return render_to_response('page/importcim.html', 
                               {'message':message, 'urls':urls})
