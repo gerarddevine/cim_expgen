@@ -159,7 +159,7 @@ def expedit(request, expid=None):
                     expform.save()  
                     return HttpResponseRedirect(urls['explist']) # Redirect to list page 
                 else:
-                    return render_to_response('expedit.html', {'expform': expform, 'urls':urls}, context_instance=RequestContext(request))
+                    return render_to_response('page/expedit.html', {'expform': expform, 'urls':urls}, context_instance=RequestContext(request))
             elif 'reqform' in request.POST:
                 reqform = RequirementForm(request.POST, 
                                           instance=NumericalRequirement(), 
@@ -260,7 +260,7 @@ def reqedit(request, reqid=None):
                 reqform.save()
                 return HttpResponseRedirect(urls['reqlist']) # Redirect after POST
             else:
-                return render_to_response('reqedit.html', {'reqform': reqform, 'urls':urls}, context_instance=RequestContext(request))
+                return render_to_response('page/reqedit.html', {'reqform': reqform, 'urls':urls}, context_instance=RequestContext(request))
     else:
         reqform = RequirementForm(instance=req) # An unbound form
 
