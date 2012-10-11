@@ -17,12 +17,8 @@ def deploy():
     code_dir = '/home/gdevine/web/prod/cim_expgen'
     with settings(warn_only=True):
         if run("test -d %s" % code_dir).failed:
-            print 'YESS, FAILED!!!!!!!!!'
             run("git clone git@github.com:gerarddevine/cim_expgen.git %s" % code_dir)
-        else:
-            print 'NOOOOO, DIDNT FAIL!!!!!!!!!'
     with cd(code_dir):
-        print 'HERE!!!!!!!!!'
         run("pwd")
         run("ls -la")
         run("git pull")
