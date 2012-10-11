@@ -7,7 +7,12 @@
   <div class="page-header">
     <h3>Requirements <small>Table of current numerical requirements</small></h3>
   </div>
-              
+  
+  <div class="row"> 
+    <div class="span2 offset9">
+      <a class="btn btn-primary btn-block" href="{{ urls.reqadd }}">Add New Requirement</a>
+    </div>
+  </div>            
   <div class="row">
     <div class="span10 offset1">
       <table class="table table-striped">
@@ -30,7 +35,11 @@
               <td>{{ req.created }}</td>
               <td>{{ req.updated }}</td>
               <td><a href="{{ req.url }}"><i class="icon-search" title="View"></i></a></td>
-              <td><a href="{{ req.delurl }}"><i class="icon-trash" title="Delete"></i></a></td>
+              <td>
+              <a href="#" onclick="return MyDialogs.loadConfirmationModal('my_modal_id', 
+                                                                            '{{ req.delurl }}', 
+                                                                            'Delete Requirement', 
+                                                                            'Are you sure you want to delete {{ req.name }}?');"><i class="icon-trash" title="Delete"></i></a>
             </tr>
           {% endfor %}
         </tbody>
@@ -38,27 +47,47 @@
     </div>
   </div>
   <br/>
-  <div class="row">  
-    <div class="span2 offset9">
-      <a class="btn btn-primary btn-block" href="{{ urls.reqadd }}">Add New</a>
-    </div>
-  </div>
     
 {% endblock %}   
 
 
 {% block extrajs %}
 
-  <!-- js to check delete action -->
-  <script>
-    $('#myModal').modal(options)
+  <!-- jquery to make table row clickable -->
+  <script type="text/javascript">
+    $('tbody.rowlink').rowlink()
   </script>
+  
+  <!-- end jquery--> 
 
   <script type="text/javascript">
-    $(function() {
-      $(".ask").jConfirmAction();
-    });
+  var MyDialogs={
+    loadConfirmationModal:function(modalId, confirmURL, caption, body){
+                        var $modal=jQuery('#'+modalId);
+                        if($modal.size() === 0){
+
+                                var modalString='<div id="'+modalId+'" class="modal hide fade">'+
+                                        '<div class="modal-header">'+
+                                                '<button class="close" data-dismiss="modal">×</button>'+
+                                                '<h3>'+caption+'</h3>'+
+                                        '</div>'+
+                                        '<div class="modal-body">'+body+
+                                                '</div>'+
+                                                '<div class="modal-footer">'+
+                                                        '<button id="cancel" class="btn" data-dismiss="modal" type="button" name="cancel">Cancel</button>'+
+                                                        '<a id="submit" class="btn btn-danger" href="'+confirmURL+'">Delete</a>'+
+                                                '</div>'+
+                                '</div>';
+
+                                $modal=jQuery(modalString);
+
+                        }
+
+                        $modal.modal('show');
+                        return false;
+                }
+
+  };
   </script>
-  <!-- end of js to check delete action -->
 
 {% endblock %}

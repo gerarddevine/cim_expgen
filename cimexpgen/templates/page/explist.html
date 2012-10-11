@@ -8,6 +8,11 @@
     <h3>Experiments <small>Table of current top level experiments</small></h3>
   </div>
   
+  <div class="row"> 
+    <div class="span2 offset9">
+      <a class="btn btn-primary btn-block" href="{{ urls.expadd }}">Add New Experiment</a>
+    </div>
+  </div>
   <div class="row">
     <div class="span10 offset1">
       <table class="table table-striped">
@@ -23,6 +28,7 @@
             <th></th>
           </tr>
         </thead>
+        <!-- <tbody data-provides="rowlink"> -->
         <tbody>
           {% for exp in allexps %}
             <tr>
@@ -33,7 +39,12 @@
               <td>{{ exp.updated }}</td>
               <td><a href="{{ exp.url }}"><i class="icon-search" title="View"></i></a></td>
               <td><a href="{{ exp.cpurl }}"><i class="icon-share-alt" title="Copy"></i></a></td>
-              <td><a href="{{ exp.delurl }}"><i class="icon-trash" data-toggle="myModal" title="Delete"></i></a></td>
+              <td>
+                <a href="#" onclick="return MyDialogs.loadConfirmationModal('my_modal_id', 
+                                                                            '{{ exp.delurl }}', 
+                                                                            'Delete Experiment', 
+                                                                            'Are you sure you want to delete {{ exp.abbrev }}?');"><i class="icon-trash" title="Delete"></i></a>
+              </td>
             </tr>
           {% endfor %}
         </tbody>
@@ -41,41 +52,48 @@
     </div>
   </div>
   <br/>
-  <div class="row">  
-    <div class="span2 offset9">
-      <a class="btn btn-primary btn-block" href="{{ urls.expadd }}">Add New</a>
-    </div>
-  </div>
   
-  <div class="modal hide" id="myModal">
-    <div class="modal-header">
-      <a class="close" data-dismiss="modal">×</a>
-      <h3>Modal header</h3>
-    </div>
-    <div class="modal-body">
-      <p>One fine body…</p>
-    </div>
-    <div class="modal-footer">
-      <a href="#" class="btn" data-dismiss="modal">Close</a>
-      <a href="#" class="btn btn-success">Save changes</a>
-    </div>
-  </div>
   
 {% endblock %}
 
 
 {% block extrajs %}
-
-  <!-- js to check delete action -->
-  <script>
-    $('#myModal').modal(options)
+  
+  <!-- jquery to make table row clickable -->
+  <script type="text/javascript">
+    $('tbody.rowlink').rowlink()
   </script>
+  
+  <!-- end jquery--> 
 
   <script type="text/javascript">
-    $(function() {
-      $(".ask").jConfirmAction();
-    });
+  var MyDialogs={
+    loadConfirmationModal:function(modalId, confirmURL, caption, body){
+                        var $modal=jQuery('#'+modalId);
+                        if($modal.size() === 0){
+
+                                var modalString='<div id="'+modalId+'" class="modal hide fade">'+
+                                        '<div class="modal-header">'+
+                                                '<button class="close" data-dismiss="modal">×</button>'+
+                                                '<h3>'+caption+'</h3>'+
+                                        '</div>'+
+                                        '<div class="modal-body">'+body+
+                                                '</div>'+
+                                                '<div class="modal-footer">'+
+                                                        '<button id="cancel" class="btn" data-dismiss="modal" type="button" name="cancel">Cancel</button>'+
+                                                        '<a id="submit" class="btn btn-danger" href="'+confirmURL+'">Delete</a>'+
+                                                '</div>'+
+                                '</div>';
+
+                                $modal=jQuery(modalString);
+
+                        }
+
+                        $modal.modal('show');
+                        return false;
+                }
+
+  };
   </script>
-  <!-- end of js to check delete action -->
 
 {% endblock %}
