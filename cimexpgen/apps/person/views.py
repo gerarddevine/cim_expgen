@@ -25,7 +25,10 @@ def UserRegistration(request):
                                                       email=form.cleaned_data['email'],
                                                       password=form.cleaned_data['password1'],)
             user.save()
-            person = Person(user=user, name=form.cleaned_data['name'], institute=form.cleaned_data['institute'])
+            person = Person(user=user, 
+                            firstname=form.cleaned_data['firstname'],
+                            surname=form.cleaned_data['surname'], 
+                            institute=form.cleaned_data['institute'])
             person.save()
             
             return HttpResponseRedirect(urls['home'])

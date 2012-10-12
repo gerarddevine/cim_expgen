@@ -3,11 +3,11 @@
 import os
 thisDir = os.path.dirname(__file__)
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+DEBUG = False
+TEMPLATE_DEBUG = False
 
 ADMINS = (
-    # ('Gerard Devine', 'g.m.devine@reading.ac.uk'),
+    ('Gerard Devine', 'g.m.devine@reading.ac.uk'),
 )
 
 MANAGERS = ADMINS

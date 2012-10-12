@@ -58,16 +58,12 @@
 
 
 {% block page_column_two %}
-  
-  <div class="row">
-      <a href="{{ urls.reqedit }}" class="btn btn-primary btn-block"><strong>Edit this Requirement</strong></a>
+  <div class="well well-large span3">
+	  <div class="row">
+	    <div class="span3">
+	      <a href="{{ urls.reqlist }}" class="btn btn-block"><strong>Return to list</strong></a>
+	      <a href="{{ urls.reqedit }}" class="btn btn-block"><strong>Edit this Requirement</strong></a>
+	    </div>
+	  </div>
   </div>
-  <br/>
-  
-  <div class="row">
-    <div class="center">
-      <a href="{{ urls.reqlist }}">..or return to requirement list</a>                             
-    </div>
-  </div>
-
 {% endblock %}      
