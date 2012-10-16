@@ -15,7 +15,7 @@ urlpatterns = patterns('',
     (r'^explist/$', 'cimexpgen.apps.expgenapp.views.explist', {}, 'explist'),
     
     #add new experiment page 
-    (r'^expadd/$', 'cimexpgen.apps.expgenapp.views.expedit', {}, 'expadd'),
+    (r'^expadd/$', 'cimexpgen.apps.expgenapp.views.expadd', {}, 'expadd'),
     
     #view experiment page 
     (r'^expview/(?P<expid>\d+)/$', 'cimexpgen.apps.expgenapp.views.expview', {}, 'expview'),

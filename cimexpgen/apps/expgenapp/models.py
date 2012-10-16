@@ -1,15 +1,16 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 from lxml import etree as ET
   
-  
+ 
 class Experiment(models.Model):
     ''' Class to represent numericalExperiment  '''
     
     abbrev          = models.CharField(max_length=40)
     title           = models.CharField(max_length=128, blank=True, null=True)
-    author          = models.CharField(max_length=64, blank=True, null=True)
     project         = models.CharField(max_length=64, blank=True, null=True)
+    author          = models.ForeignKey(User)
     control         = models.BooleanField(default=False)
     description     = models.TextField(blank=True, null=True)
     rationale       = models.TextField(blank=True, null=True)
@@ -18,12 +19,17 @@ class Experiment(models.Model):
     created         = models.DateField(auto_now_add=True, editable=False)
     updated         = models.DateField(auto_now=True, editable=False)
     
+    class Meta:
+      permissions = (
+            ('manage_exp', 'Can manage experiment'),
+        )
+    
     def __unicode__(self):
         return self.abbrev
     
     def gencimxml(self):
         #Generate an xml instance string of myself
-        return ET.tostring(self.xmlobject(), pretty_print=True)    
+        return ET.tostring(self.xmlobject(), pretty_print=True)
         
 
 class NumericalRequirement(models.Model):

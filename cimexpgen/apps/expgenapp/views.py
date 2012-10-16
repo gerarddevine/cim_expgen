@@ -4,6 +4,9 @@ from django.core.urlresolvers import reverse
 from django.template.context import RequestContext
 from django.contrib.auth.decorators import login_required
 
+from guardian.shortcuts import assign
+from guardian.decorators import permission_required_or_403
+
 from apps.expgenapp.models import Experiment
 from apps.expgenapp.models import NumericalRequirement
 from apps.expgenapp.forms import ExperimentForm, RequirementForm
@@ -57,7 +60,7 @@ def explist(request):
         urls = genurls()
         urls['modalform1'] = reverse('cimexpgen.apps.expgenapp.views.modalform1',
                                    args=())
-        allexps = Experiment.objects.all()
+        allexps = Experiment.objects.filter(author=request.user)
         for exp in allexps:
             exp.url = reverse('cimexpgen.apps.expgenapp.views.expview',
                               args=(exp.id, ))
@@ -73,11 +76,11 @@ def explist(request):
 
 
 @login_required
+@permission_required_or_403('expgenapp.manage_exp', (Experiment, 'id', 'expid'))
 def expview(request, expid):
     '''
     controller for individual experiment view page
-    '''
-    
+    '''    
     exp = get_object_or_404(Experiment, pk=expid)
     
     # get my urls
@@ -99,6 +102,7 @@ def expview(request, expid):
 
 
 @login_required
+@permission_required_or_403('expgenapp.manage_exp', (Experiment, 'id', 'expid'))
 def expcopy(request, expid):
     '''
     controller for individual experiment copy page
@@ -115,6 +119,7 @@ def expcopy(request, expid):
 
 
 @login_required
+@permission_required_or_403('expgenapp.manage_exp', (Experiment, 'id', 'expid'))
 def expdelete(request, expid):
     '''
     controller for individual experiment delete page
@@ -127,18 +132,15 @@ def expdelete(request, expid):
     exp.delete()
     
     return HttpResponseRedirect(urls['explist']) # Redirect after POST
-         
+  
 
 @login_required
-def expedit(request, expid=None):
+def expadd(request):
     '''
-    controller for individual experiment edit page
+    controller for experiment add page
     '''
     
-    if expid:
-        exp = get_object_or_404(Experiment, pk=expid)
-    else: 
-        exp = Experiment()
+    exp = Experiment()
         
     # get my urls
     urls = genurls()
@@ -147,16 +149,70 @@ def expedit(request, expid=None):
     if request.method == 'POST':
         cancel = request.POST.get('cancel', None)
         if cancel:
-            if expid:  # reroute back to view page
-                urls['expview']=reverse('cimexpgen.apps.expgenapp.views.expview',args=(exp.id, ))
-                return HttpResponseRedirect(urls['expview'])
-            else:  # reroute back to exp list page
-                return HttpResponseRedirect(urls['explist'])
+            return HttpResponseRedirect(urls['explist'])
         else:        
             if 'expform' in request.POST:
                 expform = ExperimentForm(request.POST, instance=exp, prefix='exp') 
                 if expform.is_valid(): 
-                    expform.save()  
+                    exp = expform.save(commit=False)
+                    exp.author = request.user
+                    exp.save()
+                    # assign permissions to access this experiment
+                    assign('manage_exp', request.user, exp)
+                    
+                    return HttpResponseRedirect(urls['explist']) # Redirect to list page 
+                else:
+                    return render_to_response('page/expedit.html', {'expform': expform, 'urls':urls}, context_instance=RequestContext(request))
+            elif 'reqform' in request.POST:
+                reqform = RequirementForm(request.POST, 
+                                          instance=NumericalRequirement(), 
+                                          prefix='req') 
+                if reqform.is_valid(): 
+                    newreq = reqform.save()
+                    exp.requirements.add(newreq)
+            
+                return HttpResponseRedirect(urls['explist']) # Redirect to list page
+    else:
+        expform = ExperimentForm(instance=exp, prefix='exp') # An unbound form
+        reqform = RequirementForm(prefix='req') # An unbound form
+
+    return render_to_response('page/expedit.html', 
+                              {'expform': expform,               
+                               'reqform': reqform, 
+                               'urls':urls},
+                                context_instance=RequestContext(request))
+
+
+
+@login_required
+@permission_required_or_403('expgenapp.manage_exp', (Experiment, 'id', 'expid'))
+def expedit(request, expid=None):
+    '''
+    controller for individual experiment edit page
+    '''
+    
+    exp = get_object_or_404(Experiment, pk=expid)
+        
+    # get my urls
+    urls = genurls()
+    
+    # Deal with response 
+    if request.method == 'POST':
+        cancel = request.POST.get('cancel', None)
+        if cancel:
+            # reroute back to view page
+            urls['expview']=reverse('cimexpgen.apps.expgenapp.views.expview',args=(exp.id, ))
+            return HttpResponseRedirect(urls['expview'])
+        else:        
+            if 'expform' in request.POST:
+                expform = ExperimentForm(request.POST, instance=exp, prefix='exp') 
+                if expform.is_valid(): 
+                    exp = expform.save(commit=False)
+                    exp.author = request.user
+                    exp.save()
+                    # assign permissions to access this experiment
+                    assign('manage_exp', request.user, exp)
+                    
                     return HttpResponseRedirect(urls['explist']) # Redirect to list page 
                 else:
                     return render_to_response('page/expedit.html', {'expform': expform, 'urls':urls}, context_instance=RequestContext(request))
@@ -181,6 +237,7 @@ def expedit(request, expid=None):
 
 
 @login_required
+@permission_required_or_403('expgenapp.manage_exp', (Experiment, 'id', 'expid'))
 def exppub(request, expid):
     '''
     controller for individual experiment publish page
@@ -300,3 +357,4 @@ def importcim(request):
     
     return render_to_response('page/importcim.html', 
                               {'message':message, 'urls':urls})
+    

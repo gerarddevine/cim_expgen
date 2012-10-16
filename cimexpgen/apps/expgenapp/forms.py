@@ -13,11 +13,12 @@ from apps.expgenapp.models import Experiment, NumericalRequirement
 
 class ExperimentForm(ModelForm):
     class Meta:
-        model = Experiment 
+        model = Experiment
+        exclude = ('author',) 
         widgets = {
             'abbrev': forms.TextInput(attrs={'class':'input-xlarge'}),
             'title': forms.TextInput(attrs={'class':'input-xlarge'}),
-            'author': forms.TextInput(attrs={'class':'input-xlarge'}),
+            #'author': forms.TextInput(attrs={'class':'input-xlarge'}),
             'project': forms.TextInput(attrs={'class':'input-xlarge'}),
             'description': forms.Textarea(attrs={'class':'input-xlarge'}),
             'rationale': forms.Textarea(attrs={'class':'input-xlarge'}),

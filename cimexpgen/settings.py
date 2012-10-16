@@ -3,8 +3,8 @@
 import os
 thisDir = os.path.dirname(__file__)
 
-DEBUG = False
-TEMPLATE_DEBUG = False
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     ('Gerard Devine', 'g.m.devine@reading.ac.uk'),
@@ -108,6 +108,18 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.admin',
     'south',
+    'guardian',
     'apps.expgenapp',
     'apps.person'
 )
+
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend', # this is default
+    'guardian.backends.ObjectPermissionBackend',
+)
+
+
+# for django-guardian
+ANONYMOUS_USER_ID = -1
+
