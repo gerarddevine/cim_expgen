@@ -40,11 +40,17 @@ class NumericalRequirement(models.Model):
     name          = models.CharField(max_length=128)
     reqtype       = models.CharField(max_length=32)
     # These are added automatically
+    author        = models.ForeignKey(User)
     created       = models.DateField(auto_now_add=True, editable=False)
     updated       = models.DateField(auto_now=True, editable=False)
         
     def __unicode__(self):
         return self.name
+    
+    class Meta:
+      permissions = (
+            ('manage_req', 'Can manage requirement'),
+        )
     
 
 class RequirementOption(models.Model):

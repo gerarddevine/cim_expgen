@@ -24,8 +24,8 @@ def genurls():
     urls['register'] = reverse('register', args=())
     urls['explist'] = reverse('explist', args=())
     urls['expadd'] = reverse('expadd', args=())
-    urls['reqlist'] = reverse('cimexpgen.apps.expgenapp.views.reqlist', args=())
-    urls['reqadd'] = reverse('cimexpgen.apps.expgenapp.views.reqedit', args=())
+    urls['reqlist'] = reverse('reqlist', args=())
+    urls['reqadd'] = reverse('reqadd', args=())
     urls['importcim'] = reverse('cimexpgen.apps.expgenapp.views.importcim', args=())
     
     return urls

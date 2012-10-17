@@ -37,6 +37,7 @@ class RequirementForm(ModelForm):
 
     class Meta:
         model = NumericalRequirement
+        exclude = ('author',) 
         widgets = {
             'name': forms.TextInput(attrs={'class':'input-xlarge'}),
             'docid': forms.TextInput(attrs={'class':'input-xlarge'}),

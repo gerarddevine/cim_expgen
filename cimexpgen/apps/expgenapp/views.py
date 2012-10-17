@@ -256,7 +256,7 @@ def reqlist(request):
     '''
     
     try:        
-        allreqs = NumericalRequirement.objects.all()
+        allreqs = NumericalRequirement.objects.filter(author=request.user)
         for req in allreqs:
             req.url = reverse('cimexpgen.apps.expgenapp.views.reqview', 
                               args=(req.id, ))
@@ -274,6 +274,7 @@ def reqlist(request):
 
 
 @login_required
+@permission_required_or_403('expgenapp.manage_req', (NumericalRequirement, 'id', 'reqid'))
 def reqview(request, reqid):
     '''
     controller for individual requirement view page
@@ -290,15 +291,12 @@ def reqview(request, reqid):
 
 
 @login_required
-def reqedit(request, reqid=None):
+def reqadd(request):
     '''
-    controller for individual numerical requirement edit page
+    controller for individual numerical requirement add page
     '''
     
-    if reqid:
-        req = get_object_or_404(NumericalRequirement, pk=reqid)
-    else:
-        req = NumericalRequirement()  
+    req = NumericalRequirement()  
     
     # get my urls
     urls = genurls()  
@@ -306,15 +304,16 @@ def reqedit(request, reqid=None):
     if request.method == 'POST': 
         cancel = request.POST.get('cancel', None)
         if cancel:
-            if reqid:  # reroute back to view page
-                urls['reqview']=reverse('cimexpgen.apps.expgenapp.views.reqview', args=(req.id, ))
-                return HttpResponseRedirect(urls['reqview'])
-            else:  # reroute back to req list page
-                return HttpResponseRedirect(urls['reqlist'])
+            return HttpResponseRedirect(urls['reqlist'])
         else:          
             reqform = RequirementForm(request.POST, instance=req)
             if reqform.is_valid():
-                reqform.save()
+                req = reqform.save(commit=False)
+                req.author = request.user
+                req.save()
+                # assign permissions to access this requirement
+                assign('manage_req', request.user, req)
+                
                 return HttpResponseRedirect(urls['reqlist']) # Redirect after POST
             else:
                 return render_to_response('page/reqedit.html', {'reqform': reqform, 'urls':urls}, context_instance=RequestContext(request))
@@ -326,6 +325,43 @@ def reqedit(request, reqid=None):
 
 
 @login_required
+@permission_required_or_403('expgenapp.manage_req', (NumericalRequirement, 'id', 'reqid'))
+def reqedit(request, reqid=None):
+    '''
+    controller for individual numerical requirement edit page
+    '''
+    
+    req = get_object_or_404(NumericalRequirement, pk=reqid)  
+    
+    # get my urls
+    urls = genurls()  
+          
+    if request.method == 'POST': 
+        cancel = request.POST.get('cancel', None)
+        if cancel:
+            urls['reqview']=reverse('cimexpgen.apps.expgenapp.views.reqview', args=(req.id, ))
+            return HttpResponseRedirect(urls['reqview'])
+        else:          
+            reqform = RequirementForm(request.POST, instance=req)
+            if reqform.is_valid():
+                req = reqform.save(commit=False)
+                req.author = request.user
+                req.save()
+                # assign permissions to access this requirement
+                assign('manage_req', request.user, req)
+                
+                return HttpResponseRedirect(urls['reqlist']) # Redirect after POST
+            else:
+                return render_to_response('page/reqedit.html', {'reqform': reqform, 'urls':urls}, context_instance=RequestContext(request))
+    else:
+        reqform = RequirementForm(instance=req) # An unbound form
+
+    return render_to_response('page/reqedit.html', {'reqform': reqform, 'urls':urls}, 
+                                context_instance=RequestContext(request))
+
+
+@login_required
+@permission_required_or_403('expgenapp.manage_req', (NumericalRequirement, 'id', 'reqid'))
 def reqdelete(request, reqid=None):
     '''
     controller for deleting an individual requirement

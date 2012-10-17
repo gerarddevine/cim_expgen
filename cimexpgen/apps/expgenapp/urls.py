@@ -36,10 +36,10 @@ urlpatterns = patterns('',
     #----------Requirements---------------------------------------------
     
     #requirements list page
-    (r'^reqlist/$', 'cimexpgen.apps.expgenapp.views.reqlist'),
+    (r'^reqlist/$', 'cimexpgen.apps.expgenapp.views.reqlist',{}, 'reqlist'),
     
     #add new requirement page 
-    (r'^reqadd/$', 'cimexpgen.apps.expgenapp.views.reqedit',{}, 'reqadd'),
+    (r'^reqadd/$', 'cimexpgen.apps.expgenapp.views.reqadd',{}, 'reqadd'),
     
     #view requirement page 
     (r'^reqview/(?P<reqid>\d+)/$', 'cimexpgen.apps.expgenapp.views.reqview',{}, 'reqview'),
