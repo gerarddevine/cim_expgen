@@ -69,7 +69,8 @@ def getCIMXML(expid):
     RP = ET.SubElement(auth, GMD_NAMESPACE_BRACKETS+"CI_ResponsibleParty")
     IN = ET.SubElement(RP, GMD_NAMESPACE_BRACKETS+"individualName")
     CS = ET.SubElement(IN, GCO_NAMESPACE_BRACKETS+"CharacterString")
-    CS.text = exp.author
+    # TODO - Add the User first name and last name
+    CS.text = "To be done"
     
     #Append documentID
     docID = ET.SubElement(root, "documentID")
