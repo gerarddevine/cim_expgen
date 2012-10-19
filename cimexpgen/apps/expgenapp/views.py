@@ -152,7 +152,7 @@ def expadd(request):
             return HttpResponseRedirect(urls['explist'])
         else:        
             if 'expform' in request.POST:
-                expform = ExperimentForm(request.POST, instance=exp, prefix='exp') 
+                expform = ExperimentForm(request.POST, instance=exp, prefix='exp', user=request.user) 
                 if expform.is_valid(): 
                     exp = expform.save(commit=False)
                     exp.author = request.user
@@ -173,7 +173,7 @@ def expadd(request):
             
                 return HttpResponseRedirect(urls['explist']) # Redirect to list page
     else:
-        expform = ExperimentForm(instance=exp, prefix='exp') # An unbound form
+        expform = ExperimentForm(instance=exp, prefix='exp', user=request.user) # An unbound form
         reqform = RequirementForm(prefix='req') # An unbound form
 
     return render_to_response('page/expedit.html', 
@@ -205,7 +205,7 @@ def expedit(request, expid=None):
             return HttpResponseRedirect(urls['expview'])
         else:        
             if 'expform' in request.POST:
-                expform = ExperimentForm(request.POST, instance=exp, prefix='exp') 
+                expform = ExperimentForm(request.POST, instance=exp, prefix='exp', user=request.user) 
                 if expform.is_valid(): 
                     exp = expform.save(commit=False)
                     exp.author = request.user
@@ -226,7 +226,7 @@ def expedit(request, expid=None):
             
                 return HttpResponseRedirect(urls['explist']) # Redirect to list page
     else:
-        expform = ExperimentForm(instance=exp, prefix='exp') # An unbound form
+        expform = ExperimentForm(instance=exp, prefix='exp', user=request.user) # An unbound form
         reqform = RequirementForm(prefix='req') # An unbound form
 
     return render_to_response('page/expedit.html', 

@@ -12,6 +12,13 @@ from apps.expgenapp.models import Experiment, NumericalRequirement
 
 
 class ExperimentForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+      user = kwargs.pop('user', None)
+      self.validate = kwargs.pop('validate', False)
+      super(ExperimentForm, self).__init__(*args, **kwargs)
+
+      self.fields['requirements'].queryset = NumericalRequirement.objects.filter(author=user)
+
     class Meta:
         model = Experiment
         exclude = ('author',) 
