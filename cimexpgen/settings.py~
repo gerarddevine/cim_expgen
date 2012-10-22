@@ -4,7 +4,11 @@ import os
 thisDir = os.path.dirname(__file__)
 
 DEBUG = False
+<<<<<<< HEAD
+TEMPLATE_DEBUG = DEBUG
+=======
 TEMPLATE_DEBUG = False
+>>>>>>> 6301ced44b12bedd1094b62b7548cdddc235b755
 
 ADMINS = (
     ('Gerard Devine', 'g.m.devine@reading.ac.uk'),
