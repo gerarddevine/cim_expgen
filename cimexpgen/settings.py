@@ -12,6 +12,8 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+SERVER_EMAIL = 'imap.exchange.reading.ac.uk'
+
 DATABASE_ENGINE = 'sqlite3'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
 DATABASE_NAME = os.path.join(thisDir, 'cim_expgen.sqlite') # Or path to database file if using sqlite3.
 DATABASE_USER = ''             # Not used with sqlite3.
@@ -122,4 +124,11 @@ AUTHENTICATION_BACKENDS = (
 
 # for django-guardian
 ANONYMOUS_USER_ID = -1
+
+
+try:
+    from local_settings import *
+except ImportError:
+    pass
+
 
