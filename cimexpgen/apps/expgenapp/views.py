@@ -206,8 +206,9 @@ def expedit(request, expid=None):
         else:        
             if 'expform' in request.POST:
                 expform = ExperimentForm(request.POST, instance=exp, prefix='exp', user=request.user) 
-                if expform.is_valid(): 
-                    exp = expform.save(commit=False)
+                if expform.is_valid():
+                    #exp = expform.save(commit=False)
+                    exp = expform.save()
                     exp.author = request.user
                     exp.save()
                     # assign permissions to access this experiment

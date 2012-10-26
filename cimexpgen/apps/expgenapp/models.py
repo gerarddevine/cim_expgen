@@ -39,8 +39,9 @@ class NumericalRequirement(models.Model):
     description   = models.TextField(blank=True, null=True)
     name          = models.CharField(max_length=128)
     reqtype       = models.CharField(max_length=32)
-    # These are added automatically
+    options       = models.ManyToManyField('RequirementOption', blank=True, null=True)
     author        = models.ForeignKey(User)
+    # These are added automatically
     created       = models.DateField(auto_now_add=True, editable=False)
     updated       = models.DateField(auto_now=True, editable=False)
         
@@ -56,11 +57,8 @@ class NumericalRequirement(models.Model):
 class RequirementOption(models.Model):
     ''' Class to represent a numerical requirement option '''
     
-    docid           = models.CharField(max_length=64)
-    description     = models.TextField(blank=True, null=True)
-    name            = models.CharField(max_length=128)
-    # These are added automatically
-    created         = models.DateField(auto_now_add=True, editable=False)
-        
+    option           = models.CharField(max_length=64)
+    optionID         = models.TextField(blank=True, null=True)
+    
     def __unicode__(self):
-        return self.name
+        return self.option
